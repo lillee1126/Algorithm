@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+const int N=1e3+10;
+vector<int> e[N];
+bool vis[N];
+int del;
+void dfs(int s){
+    if(s==del){
+        return ;
+    }
+    if(vis[s]){
+        return ;
+    }
+    vis[s]=1;
+    for(int i=0;i<e[s].size();i++){
+        dfs(e[s][i]);
+    }
+}
+void solve(){
+    cin>>n>>m;
+    for(int i=1;i<=m;i++){
+        int a,b;
+        cin>>a>>b;
+        e[a].push_back(b);
+        e[b].push_back(a);
+    }
+    int f,t;
+    cin>>f>>t;
+    dfs(f);
+    if(!vis[t]){
+        cout<<-1;
+        return;
+    }
+    int ans=0;
+    for(int i=1;i<=n;i++){
+        if(i==f||i==t){
+            continue;
+        }
+        del=i;
+        memset(vis,0,sizeof vis);
+        dfs(f);
+        if(!vis[t])
+            ans++;
+    }
+    cout<<ans;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
