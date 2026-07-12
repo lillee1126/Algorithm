@@ -1,0 +1,56 @@
+//第三题消消乐，给定一个纯含有 A 和 B 的字串，出现 AB 可以消除，问该字串能够连续消除的最长字串的长度，比如 ABABAAABBBABAB 就是 14
+
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    string s;
+    cin>>s;
+    stack<int> st;//AAAABABAAABBBAAAB
+    for(int i=0;i<s.size();i++) {
+        if(st.empty()){
+            st.push(i+1);
+            continue;
+        }
+        if(s[i]=='B'&&s[st.top()-1]=='A'){
+            st.pop();
+        }
+        else{
+            st.push(i+1);
+        }
+    }
+    if(st.empty()){
+        cout<<s.size();
+    }
+    else{
+        vector<int> v;
+        v.push_back(s.size());
+        while(!st.empty()){
+            v.push_back(st.top());
+            st.pop();
+        }
+        v.push_back(1);
+        int ans=0;
+        for(int i=0;i<v.size()-1;i++){
+            if(i==0){
+                ans=max(ans,v[i]-v[i+1]);
+            }
+            else if(i==v.size()-2){
+                ans=max(ans,v[i]-v[i+1]);
+            }
+            else{
+                ans=max(ans,v[i]-v[i+1]-1);
+            }
+        }
+        cout<<ans;
+    }
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
