@@ -1,0 +1,48 @@
+//https://www.nowcoder.com/questionTerminal/e417cfe32c74416ca38247f619ddb322?utm_source=chatgpt.com
+
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int a[110],vis[110];
+void solve(){
+    int n,s,k;
+    cin>>n>>s>>k;
+    int rest=n;
+    for(int i=0;i<n;i++){
+        a[i]=i;
+    }
+    int cnt=0;
+    while(rest!=1){
+        if(!vis[s]){
+            cnt++;
+        }
+        else{
+            s++;
+            s=s%n;
+            continue;
+        }
+        if(cnt%k==0){
+            cnt=0;
+            vis[s]=1;
+            //cout<<a[s]<<' ';
+            rest--;
+        }
+        s++;
+        s=s%n;
+    }
+    for(int i=0;i<n;i++){
+        if(!vis[i]){
+            cout<<i;
+            return ;
+        }
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
