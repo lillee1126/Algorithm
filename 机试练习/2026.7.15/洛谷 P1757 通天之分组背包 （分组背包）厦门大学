@@ -1,0 +1,43 @@
+//https://www.luogu.com.cn/problem/P1757
+
+//4.48
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+const int N=1e3+10;
+map<int,pair<int,int>> mp;
+int dp[1010];
+vector<pair<int,int>> v[N];
+void solve(){
+    cin>>m>>n;
+    int num=0;
+    for(int i=1;i<=n;i++){
+        int a,b,c;
+        cin>>a>>b>>c;
+        v[c].push_back({a,b});
+        num=max(num,c);
+    }
+    for(int i=1;i<=num;i++){
+        int ndp[1010];
+        for(int j=0;j<=m;j++){
+            ndp[j]=dp[j];//不选这一组
+        }
+        for(int j=0;j<v[i].size();j++) {//遍历这一组的物品
+            for(int k=v[i][j].first;k<=m;k++)
+                ndp[k]=max(ndp[k],dp[k-v[i][j].first]+v[i][j].second);
+        }
+        for(int j=0;j<=m;j++){
+            dp[j]=ndp[j];
+        }
+    }
+    cout<<dp[m];
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
