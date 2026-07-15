@@ -1,0 +1,43 @@
+//https://www.luogu.com.cn/problem/P1589
+//15.42
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,k;
+const int N=1e4+10;
+pair<int,int> a[N];
+void solae(){
+    cin>>n>>k;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].first>>a[i].second;
+    }
+    sort(a+1,a+1+n);
+    int ans=0;
+    int cur=-1;
+    for(int i=1;i<=n;i++){
+        if(a[i].second<cur){
+            continue;
+        }
+        if(a[i].first<cur){
+            a[i].first=cur;
+        }
+        int len=a[i].second-a[i].first;
+        ans+=len/k;
+        if(len%k){
+            ans++;
+            cur=a[i].second+(k-len%k);
+        }
+        else{
+            cur=a[i].second;
+        }
+    }
+    cout<<ans;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solae();
+	return 0;
+}
