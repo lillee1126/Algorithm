@@ -1,0 +1,36 @@
+class Solution {
+bool dp[1010][1010];
+public:
+    string longestPalindrome(string s) {
+        string ans ="";
+        ans+=s[0];
+        int n=s.size();
+        for(int i=0;i<n;i++){
+            dp[i][i]=1;
+        }
+        for(int r=1;r<n;r++){
+            for(int l=0;l<r;l++){
+                if(s[r]==s[l]){
+                    if(r-l+1==2||r-l+1==3){
+                        dp[l][r]=1;
+                        if(ans.size()<r-l+1){
+                            ans=s.substr(l,r-l+1);
+                        }
+                    }
+                    else{
+                        dp[l][r]=dp[l+1][r-1];
+                        if(dp[l][r]){
+                            if(ans.size()<r-l+1){
+                               ans=s.substr(l,r-l+1);
+                        }
+                        }
+                    }
+                }
+                else{
+                    dp[l][r]=0;
+                }
+            }
+        }
+        return ans;
+    }
+};

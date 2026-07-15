@@ -1,0 +1,87 @@
+//http://bailian.openjudge.cn/xly20260702/E/
+
+//二维数组写法
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,k;
+const int N=1e2+10;
+int dp[N][N];//前i个产品，余数为j的最大总和
+int a[N];
+void solve(){
+    cin>>n>>k;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    for(int i=0;i<=n;i++){
+        for(int j=0;j<k;j++){
+            dp[i][j]=-1;
+        }
+    }
+    dp[0][0]=0;
+    for(int i=1;i<=n;i++){
+        for(int j=0;j<k;j++){
+            //不选当前
+            dp[i][j]=max(dp[i][j],dp[i-1][j]);
+            if(dp[i-1][j]==-1){//之前无法达到余数为j的状态则跳过
+                continue;
+            }
+            int to=(j+a[i])%k;
+            dp[i][to]=max(dp[i][to],dp[i-1][j]+a[i]);
+        }
+    }
+    cout<<dp[n][0];
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
+
+/* 一维数组
+    #include <bits/stdc++.h>
+    #define int long long
+    #define endl '\n'
+    using namespace std;
+    int n,k;
+    const int N=1e2+10;
+    int a[N];
+    int dp[N];
+    void solve(){
+        cin>>n>>k;
+        for(int i=1;i<=n;i++){
+            cin>>a[i];
+        }
+        for(int i=0;i<k;i++){
+            dp[i]=-1;
+        }
+        dp[0]=0;
+        for(int i=1;i<=n;i++){
+            int ndp[N];
+            for(int j=0;j<k;j++){
+                ndp[j]=dp[j];//不选当前
+            }
+            for(int j=0;j<k;j++){
+                if(dp[j]==-1){
+                    continue;
+                }
+                int to=(j+a[i])%k;
+                ndp[to]=max(ndp[to],dp[j]+a[i]);
+            }
+            for(int j=0;j<k;j++){
+                dp[j]=ndp[j];
+            }
+        }
+        cout<<dp[0];
+    }
+    signed main(){
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+        solve();
+        return 0;
+    }
+ */
