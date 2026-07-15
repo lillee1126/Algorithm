@@ -1,0 +1,50 @@
+//https://www.luogu.com.cn/problem/B3625
+//4.25
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+char a[110][110];
+int d[4][2]={
+        {0,1},{1,0},{-1,0},{0,-1}
+};
+bool vis[110][110];
+bool dfs(int x,int y){
+    if(x==n&&y==m){
+        return 1;
+    }
+    for(int i=0;i<4;i++){
+        int dx=x+d[i][0];
+        int dy=y+d[i][1];
+        if(dx>0&&dx<=n&&dy>0&&dy<=m&&!vis[dx][dy]&&a[dx][dy]=='.'){
+            vis[dx][dy]=1;
+            if(dfs(dx,dy)){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+void solve(){
+    cin>>n>>m;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            cin>>a[i][j];
+        }
+    }
+    vis[1][1]=1;
+    if(dfs(1,1)){
+        cout<<"Yes";
+    }
+    else{
+        cout<<"No";
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
