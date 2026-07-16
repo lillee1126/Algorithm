@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+void solve(){
+    string s;
+    cin >> s;
+    int t;
+    cin >> t;
+
+    while(t--){
+        int l, r;
+        cin >> l >> r;
+        l--;
+        r--;
+        string temp = s.substr(l, r - l + 1);   // 取出 [l, r]
+        string ns = s.substr(0, l) + s.substr(r + 1); // 删除 [l, r]
+
+        string a, b;
+        cin >> a >> b;
+
+        string p = a + b;
+        auto i = ns.find(p);
+        if(i == string::npos){
+            s = ns + temp;
+        }else{
+            s = ns.substr(0, i) + a + temp + b + ns.substr(i + p.size());
+        }
+    }
+
+    cout << s;
+}
+
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
