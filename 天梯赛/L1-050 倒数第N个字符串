@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int n;
+    int t;
+    cin>>n>>t;
+    int cnt=0;
+    int temp=--t;
+    while(temp){
+        temp/=26;
+        cnt++;
+    }
+    string s="";
+    for(int i=0;i<n;i++){
+        s+='z';
+    }
+    while(cnt){
+        int temp=t;
+        for(int i=0;i<cnt-1;i++){
+            temp/=26;
+        }
+        s[cnt-1]=(char)('z'-temp);
+        cnt--;
+        int p=1;
+        for(int i=0;i<cnt;i++){
+            p*=26;
+        }
+        t=t-p*temp;
+    }
+    reverse(s.begin(),s.end());
+    cout<<s;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
