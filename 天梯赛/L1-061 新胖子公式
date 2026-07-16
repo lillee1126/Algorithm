@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    double a,b;
+    cin>>a>>b;
+    double p=a/(b*b);
+    printf("%.1f\n",p);
+    if(p>25){
+        cout<<"PANG";
+    }
+    else{
+        cout<<"Hai Xing";
+    }
+}
+
+signed main() {
+    solve();
+    return 0;
+}
