@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    string s;
+    cin>>s;
+    if(s.size()==6){
+        cout<<s.substr(0,4)+'-'<<s.substr(4);
+    }
+    else{
+        int t=(s[0]-'0')*10+s[1]-'0';
+        if(t<22){
+            cout<<20;
+            cout<<s.substr(0,2)+'-'<<s.substr(2);
+        }
+        else{
+            cout<<19;
+            cout<<s.substr(0,2)+'-'<<s.substr(2);
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+    return 0;
+}
