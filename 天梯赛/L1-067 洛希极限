@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+void solve() {
+    double a,b,c;
+    cin>>a>>b>>c;
+    if(!b){
+        double t=a*2.455;
+        printf("%.2f ",t);
+        if(t>c){
+            cout<<"T_T";
+        }
+        else{
+            cout<<"^_^";
+        }
+    }
+    else{
+        double t=a*1.26;
+        printf("%.2f ",t);
+        if(t>c){
+            cout<<"T_T";
+        }
+        else{
+            cout<<"^_^";
+        }
+    }
+}
+
+signed main() {
+    solve();
+    return 0;
+}
