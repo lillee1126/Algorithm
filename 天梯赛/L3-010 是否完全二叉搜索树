@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+struct node{
+    int val,l,r;
+};
+node a[21];
+void insert(int root,int num,int t){
+    if(num==1){
+        root=num;
+        a[num].l=-1;
+        a[num].r=-1;
+    }
+
+    if(t>a[root].val){
+        if(a[root].l==-1){
+            a[root].l=num;
+        }
+        else{
+            insert(a[root].l,num,t);
+        }
+    }
+    else if(t<a[root].val){
+        if(a[root].r==-1){
+            a[root].r=num;
+        }
+        else{
+            insert(a[root].r,num,t);
+        }
+    }
+}
+
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].val;
+        a[i].l=-1;
+        a[i].r=-1;
+        insert(1,i,a[i].val);
+    }
+    queue<int> q;
+    q.push(1);
+    int f=0;
+    int flag=1;
+    int leaf=0;
+    while(!q.empty()){
+        int t=q.front();
+        q.pop();
+        if(f){
+            cout<<' ';
+        }
+        f++;
+        cout<<a[t].val;
+        if(leaf&&(a[t].l!=-1||a[t].r!=-1)){
+            flag=0;
+        }
+        if(a[t].l!=-1){
+            q.push(a[t].l);
+        }
+        else{
+            leaf=1;
+        }
+        if(a[t].r!=-1){
+            q.push(a[t].r);
+        }
+        else{
+            leaf=1;
+        }
+        if(a[t].l==-1&&a[t].r!=-1){
+            flag=0;
+        }
+    }
+    if(flag){
+        cout<<endl<<"YES";
+    }
+    else{
+        cout<<endl<<"NO";
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
