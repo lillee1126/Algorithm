@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int n;
+    stack<double> s1;
+    stack<char> s2;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        double t;
+        cin>>t;
+        s1.push(t);
+    }
+    for(int i=0;i<n-1;i++){
+        char t;
+        cin>>t;
+        s2.push(t);
+    }
+    double ans;
+    while(!s2.empty()){
+        int a,b;
+        a=s1.top();
+        s1.pop();
+        b=s1.top();
+        s1.pop();
+        char c;
+        c=s2.top();
+        s2.pop();
+        if(c=='*'){
+            ans=a*b;
+        }
+        else if(c=='+'){
+            ans=a+b;
+        }
+        else if(c=='-'){
+            ans=b-a;
+        }
+        else if(c=='/'){
+            if(a==0){
+                cout<<"ERROR: "<<b<<"/0";
+                return ;
+            }
+            else{
+                ans=b/a;
+            }
+        }
+        s1.push(ans);
+    }
+    printf("%.0f",ans);
+}
+signed main(){
+    solve();
+    return 0;
+}
