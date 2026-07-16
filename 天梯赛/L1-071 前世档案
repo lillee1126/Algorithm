@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+void ps(string s){
+    int t=1;
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='y'){
+            t=2*t;
+        }
+        else{
+            t=2*t+1;
+        }
+    }
+    cout<<t%(1<<n)+1<<endl;
+}
+void solve() {
+    cin>>n>>m;
+    for(int i=1;i<=m;i++){
+        string s;
+        cin>>s;
+        ps(s);
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
