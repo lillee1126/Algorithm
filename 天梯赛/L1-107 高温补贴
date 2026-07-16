@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int a,b,c;
+    cin>>a>>b>>c;
+    if(b){
+        if(a>=35&&c>=33){
+            cout<<"Bu Tie"<<endl<<a;
+        }
+        else{
+            cout<<"Bu Re"<<endl<<c;
+        }
+    }
+    else{
+        if(a>=35&&c>=33){
+            cout<<"Shi Nei"<<endl<<a;
+        }
+        else{
+            cout<<"Shu Shi"<<endl<<c;
+        }
+
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
