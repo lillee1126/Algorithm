@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e3+10;
+int fa[N],sz[N];
+map<int,int> m;
+int find(int x){
+    if(fa[x]==x){
+        return fa[x];
+    }
+    else{
+        return fa[x]=find(fa[x]);
+    }
+}
+void un(int x,int y){
+    int fx=find(x),fy=find(y);
+    fa[fx]=fy;
+}
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        fa[i]=i;
+    }
+    for(int i=1;i<=n;i++){
+        int k;char c;
+        cin>>k>>c;
+        for(int j=1;j<=k;j++){
+            int t;
+            cin>>t;
+            if(m.count(t)!=1){
+                m[t]=i;
+            }
+            else{
+                un(i,m[t]);
+            }
+        }
+    }
+    for(int i=1;i<=n;i++){
+        sz[find(i)]++;
+    }
+    vector<int> ans;
+    for(int i=1;i<=n;i++){
+        if(sz[i]>0){
+            ans.push_back(sz[i]);
+        }
+    }
+    cout<<ans.size()<<endl;
+    sort(ans.begin(),ans.end(),greater());
+    for(auto i=0;i<ans.size();i++){
+        if(i){
+            cout<<' ';
+        }
+        cout<<ans[i];
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
