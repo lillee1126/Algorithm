@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+int check(int t){
+    int vis[7];
+    memset(vis,0,sizeof vis);
+    vis[t]=1;
+    int cnt=n;
+    int i=6;
+    for(;i>=1;i--){
+        if(!vis[i]){
+            cnt--;
+        }
+        if(cnt==0){
+            break;
+        }
+    }
+    return i;
+}
+void solve(){
+    int a[7];
+    for(int i=1;i<=6;i++){
+        cin>>a[i];
+    }
+    cin>>n;
+    for(int i=1;i<=6;i++){
+        if(i!=1){
+            cout<<' ';
+        }
+        cout<<check(a[i]);
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
