@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+const int N=1e3+10;
+int a[N];
+void solve(){
+    cin>>n>>m;
+    int ans=0;
+    int q=INT_MAX;
+    for(int i=1;i<=m;i++){
+        int t;
+        cin>>t;
+        ans+=t;
+    }
+    int p=max(0ll,ans-n*(m-1));
+    cout<<p;
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
