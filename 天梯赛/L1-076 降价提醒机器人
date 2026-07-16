@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int n;double t;
+    cin>>n>>t;
+    for(int i=1;i<=n;i++){
+        double p;
+        cin>>p;
+        if(p<t){
+            printf("On Sale! %.1f\n",p);
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+    return 0;
+}
