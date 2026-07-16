@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,c;
+struct node{
+    string s;
+    int t;
+    int num;
+};
+const int N=5e3+10;
+node a[N];
+void solve(){
+    cin>>n>>c;
+    int cnt=0;
+    priority_queue<int> need;//大根堆
+    priority_queue<int> rest;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].s>>a[i].t;
+        a[i].num=a[i].t/c;
+        cnt+=a[i].num;
+        if(a[i].num==0){
+            cnt++;
+            a[i].num=1;
+            rest.push(c-a[i].t);
+        }
+        else{
+            if(a[i].t%c!=0){
+                a[i].num++;
+                need.push(a[i].t%c);
+            }
+        }
+        cout<<a[i].s<<' '<<a[i].num<<endl;
+    }
+    while(!need.empty()){
+        if(rest.empty()){
+            cnt+=need.size();
+            break;
+        }
+        if(rest.top()>=need.top()){
+            int t=rest.top()-need.top();
+            need.pop();
+            rest.pop();
+            if(t!=0){
+                rest.push(t);
+            }
+        }
+        else{
+            cnt++;
+            int r=c-need.top();
+            need.pop();
+            rest.push(r);
+        }
+    }
+    cout<<cnt;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
