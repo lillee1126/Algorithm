@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+struct node{
+    string l,r;
+};
+bool f(node aa,node bb){
+    return aa.l<bb.l;
+}
+vector<node> v;
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        string s1,s2;
+        char c;
+        cin>>s1>>c>>s2;
+        v.push_back({s1,s2});
+    }
+    sort(v.begin(),v.end(),f);
+    if(v[0].l!="00:00:00"){
+        cout<<"00:00:00 - "<<v[0].l<<endl;
+    }
+    string pre=v[0].r;
+    for(int i=1;i<v.size();i++){
+        if(v[i].l!=pre){
+           cout<<pre<<" - "<<v[i].l<<endl;
+        }
+        pre=v[i].r;
+    }
+    if(v[v.size()-1].r!="23:59:59"){
+        cout<<v[v.size()-1].r<<" - "<<"23:59:59";
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
