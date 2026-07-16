@@ -1,0 +1,118 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+const int N=1e6+10;
+int n,k;
+vector<int> a;
+void choose1(){
+    int n1;
+    cin>>n1;
+    vector<int> v1;
+    for(int i=0;i<n1;i++){
+        int t;
+        cin>>t;
+        v1.push_back(t);
+    }
+    int n2;
+    cin>>n2;
+    vector<int> v2;
+    for(int i=0;i<n2;i++){
+        int t;
+        cin>>t;
+        v2.push_back(t);
+    }
+    int flag=0,pos=-1;
+    for(int i=0;i<a.size();i++){
+        int j=0;
+        int te=i;
+        while (i<a.size()&&j<v1.size()&&a[i]==v1[j]){
+            j++;
+            i++;
+        }
+        if(j==v1.size()){
+            flag=1;
+            pos=i-v1.size();
+            break;
+        }
+        else{
+            i=te;
+        }
+    }
+    if(flag) {
+        vector<int> temp;
+        for (int i = 0; i < pos;i++){
+            temp.push_back(a[i]);
+        }
+        for(int i=0;i<v2.size();i++){
+            temp.push_back(v2[i]);
+        }
+        for(int i=pos+v1.size();i<a.size();i++){
+            temp.push_back(a[i]);
+        }
+        a.clear();
+        for(int i=0;i< temp.size();i++){
+            a.push_back(temp[i]);
+        }
+    }
+}
+void choose2(){
+    vector<int> temp;
+    for(int i=0;i<a.size()-1;i++){
+        if((a[i]+a[i+1])%2==0){
+            temp.push_back(a[i]);
+            temp.push_back((a[i]+a[i+1])/2);
+        }
+        else{
+            temp.push_back(a[i]);
+        }
+    }
+    temp.push_back(a[a.size()-1]);
+    a.clear();
+    for(int i=0;i<temp.size();i++){
+        a.push_back(temp[i]);
+    }
+}
+void choose3(){
+    int l,r;
+    cin>>l>>r;
+    l--;
+    r--;
+    for(int i=l,j=r;i<j;i++,j--){
+        swap(a[i],a[j]);
+    }
+}
+void solve(){
+    cin>>n>>k;
+    for(int i=0;i<n;i++){
+        int t;
+        cin>>t;
+        a.push_back(t);
+    }
+    while(k--){
+        int t;
+        cin>>t;
+        if(t==1){
+            choose1();
+        }
+        else if(t==2){
+            choose2();
+        }
+        else if(t==3){
+            choose3();
+        }
+    }
+    for(int i=0;i<a.size();i++){
+        if(i){
+            cout<<' ';
+        }
+        cout<<a[i];
+    }
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
