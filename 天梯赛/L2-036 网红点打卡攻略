@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+const int N=210;
+int e[N][N];
+int a[N];
+int vis[N];
+int n;
+pair<int,int> ans={-1,-1};
+bool check(int num){
+    int t;
+    cin>>t;
+    for(int i=1;i<=t;i++){
+        cin>>a[i];
+    }
+    if(n!=t){
+        return 0;
+    }
+    int cost=0;
+    int pre=0;
+    for(int i=1;i<=t;i++){
+        if(vis[a[i]]){
+            return 0;
+        }
+        vis[a[i]]=1;
+        if(e[pre][a[i]]){
+            cost+=e[pre][a[i]];
+            pre=a[i];
+        }
+        else{
+            return 0;
+        }
+    }
+    if(e[a[t]][0]){
+        cost+=e[a[t]][0];
+    }
+    else{
+        return 0;
+    }
+    if(ans.first==-1){
+        ans={num,cost};
+    }
+    else{
+        if(ans.second>cost){
+            ans={num,cost};
+        }
+    }
+    return 1;
+}
+void solve(){
+    int m;
+    cin>>n>>m;
+    for(int i=1;i<=m;i++){
+        int aa,b,c;
+        cin>>aa>>b>>c;
+        e[aa][b]=c;
+        e[b][aa]=c;
+    }
+    int k;
+    cin>>k;
+    int cnt=0;
+    for(int i=1;i<=k;i++){
+        memset(vis,0,sizeof vis);
+        cnt+=check(i);
+    }
+    cout<<cnt<<endl;
+    cout<<ans.first<<' '<<ans.second;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
