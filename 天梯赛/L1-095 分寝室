@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+void solve() {
+    int n0, n1, n;
+    cin >> n0 >> n1 >> n;
+
+    pair<int, int> ans = {-1, -1};
+    int best = LLONG_MAX;
+
+    // 只有女生
+    if (n1 == 0) {
+        if (n0 % n == 0 && n0 / n >= 2) {
+            cout << n << " " << 0;
+        } else {
+            cout << "No Solution";
+        }
+        return;
+    }
+
+    // 只有男生
+    if (n0 == 0) {
+        if (n1 % n == 0 && n1 / n >= 2) {
+            cout << 0 << " " << n;
+        } else {
+            cout << "No Solution";
+        }
+        return;
+    }
+
+    // 男女都有
+    for (int g = 1; g < n; g++) {
+        int b = n - g;
+
+        if (n0 % g != 0 || n1 % b != 0) continue;
+
+        int girlsPerRoom = n0 / g;
+        int boysPerRoom = n1 / b;
+
+        if (girlsPerRoom < 2 || boysPerRoom < 2) continue;
+
+        int diff = llabs(girlsPerRoom - boysPerRoom);
+        if (diff < best) {
+            best = diff;
+            ans = {g, b};
+        }
+    }
+
+    if (ans.first == -1) {
+        cout << "No Solution";
+    } else {
+        cout << ans.first << " " << ans.second;
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+    return 0;
+}
