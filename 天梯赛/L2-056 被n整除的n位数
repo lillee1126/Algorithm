@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int l,r;
+int n;
+int fd=1;
+void dfs(int t,int num){
+    if(t==n&&num>=l&&num<=r){
+        cout<<num<<endl;
+        fd=0;
+        return;
+    }
+    for(int i=0;i<=9;i++){
+        if((num*10+i)%(t+1)==0){
+            dfs(t+1,num*10+i);
+        }
+    }
+}
+void solve() {
+    cin>>n>>l>>r;
+    for(int i=1;i<=9;i++){
+        dfs(1,i);
+    }
+    if(fd){
+        cout<<"No Solution";
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
