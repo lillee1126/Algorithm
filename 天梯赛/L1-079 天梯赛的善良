@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int n;
+    cin>>n;
+    map<int,int> m;
+    for(int i=0;i<n;i++){
+        int t;
+        cin>>t;
+        m[t]++;
+    }
+    cout<<m.begin()->first<<' '<<m.begin()->second;
+    auto it=m.end();
+    it--;
+    cout<<endl;
+    cout<<it->first<<' '<<it->second;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+    return 0;
+}
