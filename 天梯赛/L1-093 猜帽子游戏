@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+#define int long long 
+#define endl '\n'
+using namespace std;
+int n;
+vector<int> a;
+void solve(){
+    vector<int> ans;
+    int flag=1;
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        int t;
+        cin>>t;
+        if(t!=0&&t!=a[i]){
+            flag=0;
+        }
+        if(t==0){
+            cnt++;
+        }
+    }
+    if(cnt==n){
+        flag=0;
+    }
+    if(flag){
+        cout<<"Da Jiang!!!"<<endl;
+    }
+    else{
+        cout<<"Ai Ya"<<endl;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        int t;
+        cin>>t;
+        a.push_back(t);
+    }
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
