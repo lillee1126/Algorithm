@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int t;
+    cin>>t;
+    int hm=130;
+    int wm=27;
+    int hf=129;
+    int wf=25;
+    while(t--){
+        int a,b,c;
+        cin>>a>>b>>c;
+        if(a){
+            if(b>hm){
+                cout<<"ni li hai!"<<' ';
+            }
+            else if(b==hm){
+                cout<<"wan mei! ";
+            }
+            else{
+                cout<<"duo chi yu! ";
+            }
+            if(c>wm){
+                cout<<"shao chi rou!";
+            }
+            else if(c==wm){
+                cout<<"wan mei!";
+            }
+            else{
+                cout<<"duo chi rou!";
+            }
+            cout<<endl;
+        }
+        else{
+            if(b>hf){
+                cout<<"ni li hai!"<<' ';
+            }
+            else if(b==hf){
+                cout<<"wan mei! ";
+            }
+            else{
+                cout<<"duo chi yu! ";
+            }
+            if(c>wf){
+                cout<<"shao chi rou!";
+            }
+            else if(c==wf){
+                cout<<"wan mei!";
+            }
+            else{
+                cout<<"duo chi rou!";
+            }
+            cout<<endl;
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
