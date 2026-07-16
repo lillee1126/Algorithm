@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int pa,pb;
+    cin>>pa>>pb;
+    int a,b,c;
+    cin>>a>>b>>c;
+    int sum=0;
+    sum=a+b+c;
+    if(pa>pb){
+        if(sum<3){
+            cout<<"The winner is a: "<<pa<<" + "<<3-sum;
+        }
+        else{
+            cout<<"The winner is b: "<<pb<<" + "<<sum;
+        }
+    }
+    else{
+        if(sum>0){
+            cout<<"The winner is b: "<<pb<<" + "<<sum;
+        }
+        else{
+            cout<<"The winner is a: "<<pa<<" + "<<3-sum;
+        }
+    }
+}
+
+signed main() {
+    solve();
+    return 0;
+}
