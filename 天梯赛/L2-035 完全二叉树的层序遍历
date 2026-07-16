@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+struct node {
+    int val, l, r;
+};
+
+node a[33];
+int getnum(int t){
+    if(t==1){
+        return 0;
+    }
+    int h=log2(t);
+    int rest=t-((1LL<<h)-1);
+    int leftlast=min(rest,1LL<<(h-1));
+    return leftlast+(1LL<<(h-1))-1;
+}
+void build(int cur, int l, int r) {
+    if(l>=r){
+        return ;
+    }
+    int len=r-l+1;
+    int nleft=getnum(len);
+    int nright=len-nleft-1;
+    if(nleft>0){
+        a[cur].l=l+nleft-1;
+        build(l+nleft-1,l,l+nleft-1);
+    }
+    if(nright>0){
+        a[cur].r=r-1;
+        build(r-1,l+nleft,r-1);
+    }
+}
+
+void solve() {
+    int n;
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i].val;
+        a[i].l = -1;
+        a[i].r = -1;
+    }
+    int root = n;
+    build(root, 1, n);
+
+    queue<int> q;
+    q.push(root);
+    int t = 0;
+
+    while (!q.empty()) {
+        if (t) {
+            cout << ' ';
+        }
+        t = q.front();
+        cout << a[t].val;
+        q.pop();
+
+        if (a[t].l != -1) {
+            q.push(a[t].l);
+        }
+        if (a[t].r != -1) {
+            q.push(a[t].r);
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

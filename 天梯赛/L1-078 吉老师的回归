@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int n,m;
+    cin>>n>>m;
+    int cnt=0,flag=0;
+    cin.ignore();
+    for(int i=1;i<=n;i++){
+        string s;
+        getline(cin,s);
+        if(s.find("qiandao")!=string::npos||s.find("easy")!=string::npos){
+            continue;
+        }
+        if(flag){
+            cout<<s;
+            return;
+        }
+        cnt++;
+        if(cnt==m){
+            flag=1;
+        }
+    }
+    cout<<"Wo AK le";
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+    return 0;
+}

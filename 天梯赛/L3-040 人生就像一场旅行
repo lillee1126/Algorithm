@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+const int N = 510;
+const long long INF = (1LL << 60);
+
+int sum, n, m, k;
+
+struct node {
+    int to, c, d;   // to, 花费, 心情
+};
+
+vector<node> e[N];
+
+void dijkstra(int s) {
+    vector<int> dist(n + 1, INF);
+    vector<int> happy(n + 1, -INF);
+    vector<int> vis(n + 1, 0);
+
+    // njszblbzlha：存储程序中间值（这里存堆中的状态）
+    priority_queue<tuple<int, int, int>,
+                   vector<tuple<int, int, int>>,
+                   greater<tuple<int, int, int>>> njszblbzlha;
+
+    dist[s] = 0;
+    happy[s] = 0;
+    njszblbzlha.push({0, 0, s}); 
+    // {当前总花费, 负的总心情(这里只是占位也行), 点编号}
+    // 实际判定仍以 dist/happy 数组为准
+
+    while (!njszblbzlha.empty()) {
+        auto [curCost, _, u] = njszblbzlha.top();
+        njszblbzlha.pop();
+
+        if (vis[u]) continue;
+        vis[u] = 1;
+
+        for (auto &ed : e[u]) {
+            int v = ed.to;
+            int w = ed.c;
+            int mood = ed.d;
+
+            if (dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                happy[v] = happy[u] + mood;
+                njszblbzlha.push({dist[v], 0, v});
+            } else if (dist[v] == dist[u] + w &&
+                       happy[v] < happy[u] + mood) {
+                happy[v] = happy[u] + mood;
+                njszblbzlha.push({dist[v], 0, v});
+            }
+        }
+    }
+
+    vector<int> can;
+    int bestHappy = -1;
+
+    for (int i = 1; i <= n; i++) {
+        if (i == s) continue;
+        if (dist[i] <= sum) {
+            can.push_back(i);
+            bestHappy = max(bestHappy, happy[i]);
+        }
+    }
+
+    if (can.empty()) {
+        cout << "T_T" << endl;
+        return;
+    }
+
+    for (int i = 0; i < (int)can.size(); i++) {
+        if (i) cout << ' ';
+        cout << can[i];
+    }
+    cout << endl;
+
+    bool first = true;
+    for (int x : can) {
+        if (happy[x] == bestHappy) {
+            if (!first) cout << ' ';
+            cout << x;
+            first = false;
+        }
+    }
+    cout << endl;
+}
+
+void solve() {
+    cin >> sum >> n >> m >> k;
+
+    for (int i = 1; i <= m; i++) {
+        int a, b, c, d;
+        cin >> a >> b >> c >> d;
+        e[a].push_back({b, c, d});
+        e[b].push_back({a, c, d});
+    }
+
+    for (int i = 1; i <= k; i++) {
+        int s;
+        cin >> s;
+        dijkstra(s);
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    solve();
+    return 0;
+}

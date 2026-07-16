@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    string s;
+    getline(cin,s);
+    for(int i=0;i<s.size();){
+        if(s[i]!='6'){
+            cout<<s[i];
+            i++;
+        }
+        else{
+            int cnt=0;
+            while(s[i]=='6'){
+                cnt++;
+                i++;
+            }
+            if(cnt<=3){
+                for(int i=0;i<cnt;i++){
+                    cout<<6;
+                }
+            }
+            else if(cnt<=9){
+                cout<<9;
+            }
+            else{
+                cout<<27;
+            }
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

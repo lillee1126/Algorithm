@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=5010;
+struct node{
+    int x,y;
+};
+node p[N];
+bool cmp(node aa,node bb){
+    return bb.y*aa.x>bb.x*aa.y;
+}
+int ans=LLONG_MAX;
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>p[i].x>>p[i].y;
+    }
+    for(int i=1;i<=n;i++){
+        node side[N];
+        int k=1;
+        for(int j=1;j<=n;j++){
+            if(j!=i){
+                side[k++]={p[j].x-p[i].x,p[j].y-p[i].y};//向量
+            }
+        }
+        sort(side+1,side+k,cmp);
+        for(int j=1;j<k-1;j++){
+            ans=min(ans,abs(side[j].x*side[j+1].y-side[j].y*side[j+1].x));
+        }
+    }
+    printf("%.3f",ans/2.0);
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}

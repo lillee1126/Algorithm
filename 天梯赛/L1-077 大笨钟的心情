@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    map<int,int> m;
+    for(int i=0;i<=23;i++){
+        int t;
+        cin>>t;
+        m[i]=t;
+    }
+    while(1){
+        int t;
+        cin>>t;
+        if(t<0||t>23){
+            return;
+        }
+        if(m[t]>50){
+            cout<<m[t]<<" Yes"<<endl;
+        }
+        else{
+            cout<<m[t]<<" No"<<endl;
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+    return 0;
+}

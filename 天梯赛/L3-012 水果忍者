@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n;
+struct point {
+    int x, y1, y2;
+};
+const int N = 1e4 + 10;
+point p[N];
+
+bool f(point aa, point bb) {
+    return aa.x < bb.x;
+}
+
+bool check(int i, double xl) {
+    for (int j = 1; j <= n; j++) {
+        if (i == j) continue;
+
+        double xl1 = 1.0 * (p[i].y1 - p[j].y1) / (p[i].x - p[j].x);
+        double xl2 = 1.0 * (p[i].y1 - p[j].y2) / (p[i].x - p[j].x);
+
+        if (xl > max(xl1, xl2) + 1e-12 || xl < min(xl1, xl2) - 1e-12) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void solve() {
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i].x >> p[i].y1 >> p[i].y2;
+    }
+
+    sort(p + 1, p + 1 + n, f);
+
+    for (int i = 1; i <= n; i++) {
+        double big = 1e100, sm = -1e100;   // 可行斜率区间 [sm, big]
+        pair<int, int> s = {0, 0}, x = {0, 0};
+        int flag = 1;
+
+        for (int j = 1; j <= n; j++) {
+            if (i == j) continue;
+
+            double xl1 = 1.0 * (p[i].y1 - p[j].y1) / (p[i].x - p[j].x);
+            double xl2 = 1.0 * (p[i].y1 - p[j].y2) / (p[i].x - p[j].x);
+
+            double low = min(xl1, xl2);
+            double high = max(xl1, xl2);
+
+            pair<int, int> lowPt, highPt;
+            if (xl1 < xl2) {
+                lowPt = {p[j].x, p[j].y1};
+                highPt = {p[j].x, p[j].y2};
+            } else {
+                lowPt = {p[j].x, p[j].y2};
+                highPt = {p[j].x, p[j].y1};
+            }
+
+            if (sm > high + 1e-12) {
+                flag = 0;
+                break;
+            }
+            if (big < low - 1e-12) {
+                flag = 0;
+                break;
+            }
+
+            if (big > high) {
+                big = high;
+                s = highPt;
+            }
+            if (sm < low) {
+                sm = low;
+                x = lowPt;
+            }
+        }
+
+        if (flag) {
+            if (check(i, 1.0 * (p[i].y1 - x.second) / (p[i].x - x.first))) {
+                cout << p[i].x << ' ' << p[i].y1 << ' ' << x.first << ' ' << x.second << endl;
+            } else {
+                cout << p[i].x << ' ' << p[i].y1 << ' ' << s.first << ' ' << s.second << endl;
+            }
+            return;
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

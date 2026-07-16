@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+const int N=110;
+char a[N][N];
+
+char c;int n;
+bool check(){
+    for(int i=1,j=n;i<j;i++,j--){
+        for(int l=1,r=n;l<r;l++,r--){
+            if(a[i][l]!=a[i][r]||a[j][l]!=a[j][r]){
+                return 0;
+            }
+        }
+        for(int k=1;k<=n;k++){
+            if(a[i][k]!=a[j][k]){
+                return 0;
+            }
+        }
+    }
+    if(n%2){
+        for(int l=1,r=n;l<r;l++,r--){
+            if(a[n/2+1][l]!=a[n/2+1][r]){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+void solve() {
+    cin>>c>>n;
+    cin.ignore();
+    for(int i=1;i<=n;i++){
+        string s;
+        getline(cin,s);
+        for(int j=1;j<=n;j++){
+            a[i][j]=s[j-1];
+        }
+    }
+    if(check()){
+        cout<<"bu yong dao le"<<endl;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if(a[i][j]=='@'){
+                    cout<<c;
+                }
+                else{
+                    cout<<a[i][j];
+                }
+            }
+            cout<<endl;
+        }
+    }
+    else{
+        for(int i=n;i>=1;i--){
+            for(int j=n;j>=1;j--){
+                if(a[i][j]=='@'){
+                    cout<<c;
+                }
+                else{
+                    cout<<a[i][j];
+                }
+            }
+            cout<<endl;
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

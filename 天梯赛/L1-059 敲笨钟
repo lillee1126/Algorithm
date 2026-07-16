@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int n;
+    cin>>n;
+    cin.ignore();
+    while(n--){
+        string s;
+        getline(cin,s);
+        int t=s.find(',');
+        if(t<3){
+            cout<<"Skipped"<<endl;
+            continue;
+        }
+        if(s.substr(t-3,3)!="ong"){
+            cout<<"Skipped";
+            cout<<endl;
+            continue;
+        }
+        t=s.find('.');
+        if(s.substr(t-3,3)!="ong"){
+            cout<<"Skipped";
+            cout<<endl;
+            continue;
+        }
+        int i=s.size()-2;
+        int cnt=0;
+        for(;i>=0;i--){
+            if(s[i]==' '){
+                cnt++;
+            }
+            if(cnt==3){
+                break;
+            }
+        }
+        for(int j=0;j<=i;j++){
+            cout<<s[j];
+        }
+        cout<<"qiao ben zhong.";
+        cout<<endl;
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

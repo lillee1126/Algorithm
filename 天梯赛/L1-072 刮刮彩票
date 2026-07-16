@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int a[4][4];
+int c[10];
+void solve() {
+    for(int i=1;i<=3;i++){
+        for(int j=1;j<=3;j++){
+            cin>>a[i][j];
+            c[a[i][j]]++;
+        }
+    }
+    for(int i=1;i<=9;i++){
+        if(c[i]==0){
+            c[0]=i;
+            break;
+        }
+    }
+    for(int i=1;i<=3;i++){
+        int x,y;
+        cin>>x>>y;
+        cout<<a[x][y]<<endl;
+    }
+    int t;
+    cin>>t;
+    int sum=0;
+    if(t<4){
+        for(int i=1;i<=3;i++){
+            if(a[t][i]==0){
+                sum+=c[0];
+                continue;
+            }
+            sum+=a[t][i];
+        }
+    }
+    else if(t<7){
+        for(int i=1;i<=3;i++){
+            if(a[i][t-3]==0){
+                sum+=c[0];
+                continue;
+            }
+            sum+=a[i][t-3];
+        }
+    }
+    else if(t==7){
+        sum+=a[1][1]+a[2][2]+a[3][3];
+        if(!(a[1][1]&&a[2][2]&&a[3][3])){
+            sum+=c[0];
+        }
+    }
+    else if(t==8){
+        sum+=a[1][3]+a[2][2]+a[3][1];
+        if(!(a[1][3]&&a[2][2]&&a[3][1])){
+            sum+=c[0];
+        }
+    }
+    map<int,int> m;
+    m[6]=10000,m[7]=36,m[8]=720,m[9]=360,m[10]=80,m[11]=252;
+    m[12]=108,m[13]=72,m[14]=54,m[15]=180,m[16]=72;
+    m[17]=180,m[18]=119,m[19]=36,m[20]=306,m[21]=1080,
+    m[22]=144,m[23]=1800,m[24]=3600;
+    cout<<m[sum];
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

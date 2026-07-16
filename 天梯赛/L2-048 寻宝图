@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+const int N=1e5+10;
+string s[N];
+vector<int> a[N];
+vector<bool> vis[N];
+int n,m;
+int ans,cnt;
+int dx[4]={0,0,1,-1};
+int dy[4]={1,-1,0,0};
+bool bfs(int x,int y){
+    int flag=0;
+    queue<pair<int,int>> q;
+    q.push({x,y});
+    while(!q.empty()){
+        auto t=q.front();
+        q.pop();
+        if(a[t.first][t.second]>1){
+            flag=1;
+        }
+        for(int i=0;i<4;i++){
+            int xx=dx[i]+t.first;
+            int yy=dy[i]+t.second;
+            if(xx>0&&xx<=n&&yy>0&&yy<=m&&!vis[xx][yy]){
+                vis[xx][yy]=1;
+                if(a[xx][yy]!=0){
+                    q.push({xx,yy});
+                }
+            }
+        }
+    }
+    if(flag){
+        return 1;
+    }
+    return 0;
+}
+void solve(){
+	cin>>n>>m;
+    for(int i=1;i<=n;i++){
+        cin>>s[i];
+    }
+    for(int i=1;i<=n;i++){
+        a[i].push_back(-1);
+        vis[i].push_back(0);
+        for(int j=0;j<s[i].size();j++){
+            a[i].push_back(s[i][j]-'0');
+            vis[i].push_back(0);
+        }
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            if(!vis[i][j]){
+                vis[i][j]=1;
+                if(a[i][j]!=0) {
+                    ans++;
+                    cnt+=bfs(i, j);
+                }
+            }
+        }
+    }
+    cout<<ans<<' '<<cnt;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}

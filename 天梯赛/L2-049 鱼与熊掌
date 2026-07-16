@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> b(m + 1); // b[p] : 拥有物品 p 的所有人
+
+    for (int i = 1; i <= n; i++) {
+        int t;
+        cin >> t;
+        for (int j = 0; j < t; j++) {
+            int p;
+            cin >> p;
+            b[p].push_back(i);
+        }
+    }
+
+    int q;
+    cin >> q;
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+
+        int i = 0, j = 0, cnt = 0;
+        while (i < (int)b[l].size() && j < (int)b[r].size()) {
+            if (b[l][i] == b[r][j]) {
+                cnt++;
+                i++;
+                j++;
+            } else if (b[l][i] < b[r][j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        cout << cnt << endl;
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+    return 0;
+}

@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n;
+const int N = 1e4 + 10;
+int din[N];
+vector<int> e[N];
+
+vector<int> path, ans;
+
+void dfs(int cur) {
+    path.push_back(cur);
+
+    // 到叶子结点，更新答案
+    if (e[cur].empty()) {
+        if (path.size() > ans.size()) {
+            ans = path;
+        }
+        else if (path.size() == ans.size() && path < ans) {
+            ans = path;
+        }
+    }
+
+    for (int i = 0; i < e[cur].size(); i++) {
+        dfs(e[cur][i]);
+    }
+
+    path.pop_back();
+}
+
+void solve() {
+    cin >> n;
+    int root = -1;
+
+    for (int i = 0; i < n; i++) {
+        int k;
+        cin >> k;
+        for (int j = 0; j < k; j++) {
+            int t;
+            cin >> t;
+            e[i].push_back(t);
+            din[t]++;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (din[i] == 0) {
+            root = i;
+            break;
+        }
+    }
+
+    dfs(root);
+
+    cout << ans.size() << endl;
+    for (int i = 0; i < ans.size(); i++) {
+        if (i) cout << ' ';
+        cout << ans[i];
+    }
+    cout << endl;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

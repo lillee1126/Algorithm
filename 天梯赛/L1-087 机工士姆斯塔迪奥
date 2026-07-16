@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m,q;
+void solve(){
+    cin>>n>>m>>q;
+    set<int> row;
+    set<int> col;
+    for(int i=0;i<q;i++){
+        int a,b;
+        cin>>a>>b;
+        if(a){
+            col.insert(b);
+        }
+        else{
+            row.insert(b);
+        }
+    }
+    cout<<n*m-row.size()*m-col.size()*n+row.size()*col.size();
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}

@@ -1,0 +1,95 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+#define endl '\n'
+int n,m;
+const int N=210;
+int enermy[N];
+map<string,int> mp;
+map<int,string> pm;
+int start,ed;
+vector<pair<int,int>> e[N];
+bool vis[N];
+map<int,int> mi;
+struct node{
+    int pre,dis,num,del;
+};
+vector<node> ans(N);
+void dfs(int pre,int cur,int dis,int num,int del){
+    if(ans[cur].dis>dis){
+        ans[cur].dis=dis;
+        ans[cur].pre=pre;
+        ans[cur].num=num;
+        ans[cur].del=del;
+    }
+    else if(ans[cur].dis==dis){
+        if(ans[cur].num<num){
+            ans[cur].pre=pre;
+            ans[cur].num=num;
+            ans[cur].del=del;
+        }
+        else if(ans[cur].num==num){
+            if(ans[cur].del<del){
+                ans[cur].pre=pre;
+                ans[cur].del=del;
+            }
+        }
+    }
+    if(cur==ed) {
+        mi[dis]++;
+    }
+    for(int i=0;i<e[cur].size();i++){
+        if(!vis[e[cur][i].first]) {
+            vis[e[cur][i].first]=1;
+            dfs(cur, e[cur][i].first, dis + e[cur][i].second, num + 1, del + enermy[e[cur][i].first]);
+            vis[e[cur][i].first]=0;
+        }
+    }
+}
+void solve(){
+    cin>>n>>m;
+    string s1,s2;
+    cin>>s1>>s2;
+    mp[s1]=1;
+    pm[1]=s1;
+    for(int i=2;i<=n;i++){
+        string s;int t;
+        cin>>s>>t;
+        mp[s]=i;
+        pm[i]=s;
+        enermy[i]=t;
+    }
+    start=1;
+    ed=mp[s2];
+    for(int i=1;i<=m;i++){
+        string a,b;int c;
+        cin>>a>>b>>c;
+        e[mp[a]].push_back({mp[b],c});
+        e[mp[b]].push_back({mp[a],c});
+    }
+    for(int i=1;i<=n;i++){
+        ans[i].dis=INT_MAX;
+        ans[i].num=0;
+        ans[i].del=0;
+    }
+    dfs(-1,1,0,0,0);
+    int cur=ed;
+    vector<string> as;
+    while(ans[cur].pre!=-1){
+        as.push_back(pm[cur]);
+        cur=ans[cur].pre;
+    }
+    cout<<pm[1];
+    for(int i=as.size()-1;i>=0;i--){
+        cout<<"->"<<as[i];
+    }
+    cout<<endl;
+    auto it=mi.begin();
+    cout<<it->second<<' '<<ans[ed].dis<<' '<<ans[ed].del;
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    solve();
+    return 0;
+}

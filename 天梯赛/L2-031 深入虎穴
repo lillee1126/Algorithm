@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e5+10;
+vector<int> e[N];
+bool vis[N];
+pair<int,int> ans={-1,-1};
+
+void dfs(int cur,int d){
+    if(e[cur].size()==0){
+        if(ans.first<d){
+            ans={d,cur};
+        }
+    }
+    for(int i=0;i<e[cur].size();i++){
+        if(!vis[e[cur][i]]){
+            vis[e[cur][i]]=1;
+            dfs(e[cur][i],d+1);
+            vis[e[cur][i]]=0;
+        }
+    }
+}
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        int k;
+        cin>>k;
+        for(int j=1;j<=k;j++){
+            int t;
+            cin>>t;
+            e[i].push_back(t);
+            vis[t]=1;
+        }
+    }
+    int root;
+    for(int i=1;i<=n;i++){
+        if(!vis[i]){
+            root=i;
+            break;
+        }
+    }
+    memset(vis,0,sizeof vis);
+    dfs(root,0);
+    cout<<ans.second;
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

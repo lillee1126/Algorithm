@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int N, M;
+    cin >> N >> M;
+
+    map<vector<int>, int> cnt;
+
+    for (int i = 0; i < N; i++) {
+        vector<int> a(M);
+        for (int j = 0; j < M; j++) {
+            cin >> a[j];
+        }
+        cnt[a]++;
+    }
+
+    vector<pair<vector<int>, int>> v;
+    for (auto &it : cnt) {
+        v.push_back({it.first, it.second});
+    }
+
+    sort(v.begin(), v.end(), [](const pair<vector<int>, int> &A, const pair<vector<int>, int> &B) {
+        if (A.second != B.second) return A.second > B.second; // 个数降序
+        return A.first < B.first; // 序列字典序升序
+    });
+
+    cout << v.size() << '\n';
+    for (auto &it : v) {
+        cout << it.second;
+        for (int x : it.first) {
+            cout << ' ' << x;
+        }
+        cout << '\n';
+    }
+
+    return 0;
+}

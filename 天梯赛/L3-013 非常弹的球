@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int a,b;
+    cin>>a>>b;
+    double t=100;
+    double rest=100-b;
+    double cur=rest;
+    for(int i=1;i<=100000;i++){
+        t=t+cur;
+        cur=cur*rest/100;
+    }
+    double p=9.8*a;
+    double q=2000*t;
+    double ans=q/p;
+    printf("%.3f",ans);
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int a[5];
+void solve() {
+    int e,f;
+    int mx=-1;
+    for(int i=1;i<=4;i++){
+        cin>>a[i];
+        mx=max(mx,a[i]);
+    }
+    cin>>e>>f;
+    pair<int,int> flag={0,-1};
+    for(int i=1;i<=4;i++){
+        if(a[i]<e){
+            flag.first++;
+            flag.second=i;
+        }
+    }
+    for(int i=1;i<=4;i++){
+        if(abs(a[i]-mx)>f){
+            if(flag.second!=i){
+                flag.first++;
+                flag.second=i;
+            }
+        }
+    }
+    if(flag.first==0){
+        cout<<"Normal";
+    }
+    else if(flag.first==1){
+        cout<<"Warning: please check #"<<flag.second<<'!';
+    }
+    else{
+        cout<<"Warning: please check all the tires!";
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

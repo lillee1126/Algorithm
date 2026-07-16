@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+const int N = 110;
+
+int m, n;                  // m=行, n=列
+int a[N][N];               // a[列][行]
+int dis[N][N];
+int ex, ey;                // 大本营坐标(列,行)
+
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+void bfs() {
+    memset(dis, -1, sizeof dis);
+    queue<pair<int,int>> q;
+    q.push({ex, ey});
+    dis[ex][ey] = 0;
+
+    while (!q.empty()) {
+        auto [x, y] = q.front();
+        q.pop();
+
+        for (int i = 0; i < 4; i++) {
+            int xx = x + dx[i];
+            int yy = y + dy[i];
+
+            if (xx >= 1 && xx <= n && yy >= 1 && yy <= m &&
+                a[xx][yy] != 0 && dis[xx][yy] == -1) {
+                dis[xx][yy] = dis[x][y] + 1;
+                q.push({xx, yy});
+            }
+        }
+    }
+}
+
+void solve() {
+    cin >> m >> n;
+
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            cin >> a[j][i];           // 按 a[列][行] 存
+            if (a[j][i] == 2) {
+                ex = j;
+                ey = i;
+            }
+        }
+    }
+
+    bfs(); // 只做一次 BFS
+
+    int k;
+    cin >> k;
+
+    vector<int> p(k + 1, -1);
+    map<int, int> cnt;
+
+    for (int i = 1; i <= k; i++) {
+        int x, y;
+        cin >> x >> y;
+        p[i] = dis[x][y];
+        if (p[i] != -1) cnt[p[i]]++;
+    }
+
+    for (auto &it : cnt) {
+        int t = it.first;
+        int num = it.second;
+        if (num == 1) {
+            for (int i = 1; i <= k; i++) {
+                if (p[i] == t) {
+                    cout << i << ' ' << t << '\n';
+                    return;
+                }
+            }
+        }
+    }
+
+    cout << "No winner." << '\n';
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+    return 0;
+}

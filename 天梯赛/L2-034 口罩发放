@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n,p;
+map<string,int> m; // 上次领取时间
+
+struct node{
+    string name,id;
+    int gr;
+    string time;
+};
+
+vector<node> ans;
+vector<pair<string,string>> sick; // 最后要输出的身体状况为1的合法申请人
+map<string,int> vis; // 症状名单去重
+
+bool check(string id){
+    if(id.size()!=18){
+        return 0;
+    }
+    for(int i=0;i<18;i++){
+        if(id[i]<'0'||id[i]>'9'){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+bool f(node aa,node bb){
+    return aa.time<bb.time;
+}
+
+void solve(){
+    cin>>n>>p;
+    for(int cur=1;cur<=n;cur++){
+        int t,num;
+        cin>>t>>num;
+        vector<node> v;
+
+        for(int i=0;i<t;i++){
+            string name,id,time;
+            int gr;
+            cin>>name>>id>>gr>>time;
+
+            if(check(id)){
+                v.push_back({name,id,gr,time});
+
+                // 合法记录且身体情况为1，按出现顺序记录，且同一个人只记一次
+                if(gr==1 && !vis[id]){
+                    vis[id]=1;
+                    sick.push_back({name,id});
+                }
+            }
+        }
+
+        stable_sort(v.begin(),v.end(),f); // 保证相同时间按原输入顺序
+
+        int cnt=0;
+        for(int i=0;i<v.size() && cnt<num;i++){
+            if(m.count(v[i].id)){
+                if(m[v[i].id]+p+1<=cur){
+                    ans.push_back(v[i]);
+                    m[v[i].id]=cur;
+                    cnt++;
+                }
+            }
+            else{
+                ans.push_back(v[i]);
+                m[v[i].id]=cur;
+                cnt++;
+            }
+        }
+    }
+
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i].name<<' '<<ans[i].id<<endl;
+    }
+
+    for(auto it:sick){
+        cout<<it.first<<' '<<it.second<<endl;
+    }
+}
+
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

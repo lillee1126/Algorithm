@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+string a[21];
+vector<int> e[21];
+bool vis[21];
+vector<int> ans;
+bool flag = 0;
+
+bool dfs(int step, int cur) {
+    bool ok = false;
+    for(int i = 1; i <= n; i++){
+        if(!vis[i] && (a[i][ans[0]] == 'W' || a[ans[0]][i] == 'L')){
+            ok = true;
+            break;
+        }
+    }
+    if(!ok && ans.size() < n) return false;
+    if (ans.size() == n) {
+        if (a[ans[n - 1]][ans[0]] == 'W'|| a[ans[0]][ans[n - 1]] == 'L') {
+            flag = 1;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    for (int i = 0; i < e[cur].size(); i++) {
+        if (!vis[e[cur][i]]) {
+            vis[e[cur][i]] = 1;
+            ans.push_back(e[cur][i]);
+            dfs(step + 1, e[cur][i]);
+            if (flag) {
+                return 1;
+            }
+            vis[e[cur][i]] = 0;
+            ans.pop_back();
+        }
+    }
+    return 0;
+}
+
+void solve() {
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        a[i] = '.' + a[i];
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (i == j) continue;
+            if (a[i][j] == 'W' || a[j][i] == 'L') {
+                e[i].push_back(j);
+            }
+        }
+        sort(e[i].begin(), e[i].end());
+    }
+    ans.push_back(1);
+    memset(vis, 0, sizeof vis);
+    vis[1] = 1;
+    if (dfs(0, 1)) {
+        for (int j = 0; j < ans.size(); j++) {
+            if (j) {
+                cout << ' ';
+            }
+            cout << ans[j];
+        }
+        return;
+    }
+    cout << "No Solution";
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

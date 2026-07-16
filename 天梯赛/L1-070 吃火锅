@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve() {
+    int cnt=0,ss=0;
+    int flag=1;
+    int ans;
+    while(1){
+        string s;
+        getline(cin,s);
+        if(s=="."){
+            cout<<cnt<<endl;
+            if(flag==0)
+                cout<<ans<<' '<<ss;
+            else
+                cout<<"-_-#";
+            return;
+        }
+        cnt++;
+        if(s.find("chi1 huo3 guo1")!=string::npos){
+            ss++;
+            if(flag) {
+                ans = cnt;
+                flag=0;
+            }
+        }
+    }
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

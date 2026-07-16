@@ -1,0 +1,182 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=110;
+struct node{
+    int val,l,r,d;
+};
+node a[N];
+map<int,int> mp;
+void build(int cur,int f){
+    if(a[cur].val>a[f].val){
+        if(!a[f].r){
+            a[f].r=cur;
+            a[cur].d=a[f].d+1;
+        }
+        else{
+            build(cur,a[f].r);
+        }
+    }
+    else{
+        if(!a[f].l){
+            a[f].l=cur;
+            a[cur].d=a[f].d+1;
+        }
+        else{
+            build(cur,a[f].l);
+        }
+    }
+}
+int jx(string s){
+    return stoll(s);
+}
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].val;
+        a[i].l=0;
+        a[i].r=0;
+        mp[a[i].val]=i;
+    }
+    a[1].d=0;
+    int root=1;
+    for(int i=2;i<=n;i++){
+        build(i,1);
+    }
+    int k;
+    cin>>k;
+    while(k--){
+        string x,y,z;
+        cin>>x>>y>>z;
+        string s;
+        getline(cin,s);
+        if(s.find("oo")!=string::npos){
+            int t=jx(x);
+            if(mp.count(t)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            if(mp[t]==1){
+                cout<<"Yes"<<endl;
+            }
+            else{
+                cout<<"No"<<endl;
+            }
+        }
+        else if(s.find("ing")!=string::npos){
+            int flag=0;
+            int pp=jx(x),qq=jx(z);
+            if(mp.count(pp)!=1||mp.count(qq)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            for(int i=1;i<=n;i++){
+                if (a[i].l && a[i].r) {
+                    if ((a[a[i].l].val == pp && a[a[i].r].val == qq) ||
+                        (a[a[i].l].val == qq && a[a[i].r].val == pp)) {
+                        flag = 1;
+                        cout<<"Yes"<<endl;
+                        break;
+                    }
+                }
+            }
+            if(!flag){
+                cout<<"No"<<endl;
+            }
+        }
+        else if(s.find("par")!=string::npos){
+            int qq=jx(x);
+            string p="";
+            for(int i=s.size()-1;i>=0;i--){
+                if(s[i]!=' '){
+                    p+=s[i];
+                }
+                else{
+                    break;
+                }
+            }
+            reverse(p.begin(),p.end());
+            int pp=jx(p);
+            if(mp.count(pp)!=1||mp.count(qq)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            if(a[mp[qq]].l==mp[pp]||a[mp[qq]].r==mp[pp]){
+                cout<<"Yes"<<endl;
+            }
+            else{
+                cout<<"No"<<endl;
+            }
+        }
+        else if(s.find("left")!=string::npos){
+            int qq=jx(x);
+            string p="";
+            for(int i=s.size()-1;i>=0;i--){
+                if(s[i]!=' '){
+                    p+=s[i];
+                }
+                else{
+                    break;
+                }
+            }
+            reverse(p.begin(),p.end());
+            int pp=jx(p);
+            if(mp.count(pp)!=1||mp.count(qq)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            if(a[mp[pp]].l==mp[qq]){
+                cout<<"Yes"<<endl;
+            }
+            else{
+                cout<<"No"<<endl;
+            }
+        }
+        else if(s.find("rig")!=string::npos){
+            int qq=jx(x);
+            string p="";
+            for(int i=s.size()-1;i>=0;i--){
+                if(s[i]!=' '){
+                    p+=s[i];
+                }
+                else{
+                    break;
+                }
+            }
+            reverse(p.begin(),p.end());
+            int pp=jx(p);
+            if(mp.count(pp)!=1||mp.count(qq)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            if(a[mp[pp]].r==mp[qq]){
+                cout<<"Yes"<<endl;
+            }
+            else{
+                cout<<"No"<<endl;
+            }
+        }
+        else if(s.find("lev")!=string::npos){
+            int pp=jx(x),qq=jx(z);
+            if(mp.count(pp)!=1||mp.count(qq)!=1){
+                cout<<"No"<<endl;
+                continue;
+            }
+            if(a[mp[pp]].d==a[mp[qq]].d){
+                cout<<"Yes"<<endl;
+            }
+            else{
+                cout<<"No"<<endl;
+            }
+        }
+    }
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

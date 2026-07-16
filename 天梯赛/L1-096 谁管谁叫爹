@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int a,b;
+    cin>>a>>b;
+    string s1= to_string(a);
+    string s2= to_string(b);
+    int as=0,bs=0;
+    for(int i=0;i<s1.size();i++){
+        as+=s1[i]-'0';
+    }
+    for(int i=0;i<s2.size();i++){
+        bs+=s2[i]-'0';
+    }
+    if(a%bs==0&&b%as==0){
+        if(a>b){
+            cout<<"A"<<endl;
+        }
+        else{
+            cout<<"B"<<endl;
+        }
+        return ;
+    }
+    if(a%bs==0){
+        cout<<"A"<<endl;
+        return;
+    }
+    if(b%as==0){
+        cout<<"B"<<endl;
+        return ;
+    }
+    if(a>b){
+        cout<<"A"<<endl;
+    }
+    else{
+        cout<<"B"<<endl;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}

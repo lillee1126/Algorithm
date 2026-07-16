@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    string a,s2;
+    cin>>a>>s2;
+    string s = "";
+    for (int i = 1; i < a.size(); i++) {
+        if (a[i] % 2 == a[i-1] % 2) {
+            s += max(a[i], a[i-1]);
+        }
+    }
+    a=s2;
+    string ss = "";
+    for (int i = 1; i < a.size(); i++) {
+        if (a[i] % 2 == a[i-1] % 2) {
+            ss += max(a[i], a[i-1]);
+        }
+    }
+    if(ss==s){
+        cout<<ss;
+    }
+    else{
+        cout<<s;
+        cout<<endl;
+        cout<<ss;
+    }
+}
+signed main(){
+	solve();
+	return 0;
+}

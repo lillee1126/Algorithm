@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m,ss;
+const int N=110;
+string s[N];
+int a[N];
+void solve() {
+    cin>>n>>m>>ss;
+    stack<char> k;//框
+    for(int i=1;i<=n;i++){
+        cin>>s[i];
+    }
+    int cnt=0;
+    while(1){
+        int t;
+        cin>>t;
+        if(t==-1){
+            return ;
+        }
+        else if(t==0){
+            if(!k.empty()){
+                cout<<k.top();
+                k.pop();
+            }
+            continue;
+        }
+        if(k.size()==ss){
+            if(a[t]<m) {
+                cout << k.top();
+                k.pop();
+                k.push(s[t][a[t]]);
+                a[t]++;
+            }
+        }
+        else{
+            if(a[t]<m){
+                k.push(s[t][a[t]]);
+                a[t]++;
+            }
+        }
+    }
+}
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}

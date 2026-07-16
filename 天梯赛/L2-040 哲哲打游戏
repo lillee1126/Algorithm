@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,m;
+const int N=1e5+10;
+vector<int> v[N];
+void solve() {
+    cin>>n>>m;
+    for(int i=1;i<=n;i++){
+        int k;
+        cin>>k;
+        for(int j=1;j<=k;j++){
+            int t;
+            cin>>t;
+            v[i].push_back(t);
+        }
+    }
+    int cur=1;
+    map<int,int> mp;//剧情点对应的存档；
+    while(m--){
+        int c;
+        cin>>c;
+        if(c==0){
+            int t;
+            cin>>t;
+            cur=v[cur][t-1];//去哪个剧情点
+        }
+        else if(c==1){
+            int t;
+            cin>>t;
+            mp[t]=cur;
+            cout<<cur<<endl;
+        }
+        else if(c==2){
+            int t;
+            cin>>t;
+            cur=mp[t];
+        }
+    }
+    cout<<cur;
+}
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
