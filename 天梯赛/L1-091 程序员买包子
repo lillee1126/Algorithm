@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int n,m,k;
+    string s;
+    cin>>n>>s>>m>>k;
+    if(k==n){
+        cout<<"mei you mai "<<s<<" de";
+    }
+    else if(k==m){
+        cout<<"kan dao le mai "<<s<<" de";
+    }
+    else{
+        cout<<"wang le zhao mai "<<s<<" de";
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
