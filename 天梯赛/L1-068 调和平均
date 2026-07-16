@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+double a[1010];
+void solve() {
+    int n;
+    cin>>n;
+    double sum=0;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        sum+=1/a[i];
+    }
+    sum=sum/n;
+    printf("%.2f",1/sum);
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    solve();
+    return 0;
+}
