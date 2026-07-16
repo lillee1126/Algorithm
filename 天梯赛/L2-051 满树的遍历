@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n;
+const int N = 100000 + 5;
+vector<int> e[N];
+
+void dfs(int cur, int nn){
+    if(nn){
+        cout << ' ';
+    }
+    cout << cur;
+    for(int i = 0; i < e[cur].size(); i++){
+        dfs(e[cur][i], nn + 1);
+    }
+}
+
+void solve(){
+    cin >> n;
+    int root;
+    for(int i = 1; i <= n; i++){
+        int t;
+        cin >> t;
+        if(t == 0){
+            root = i;
+        }
+        else{
+            e[t].push_back(i);
+        }
+    }
+
+    for(int i = 1; i <= n; i++){
+        sort(e[i].begin(), e[i].end());
+    }
+
+    int d = 0;
+    int flag = 1;
+    for(int i = 1; i <= n; i++){
+        if(e[i].size() != 0){
+            if(d == 0)
+                d = e[i].size();
+            else if(d != e[i].size()){
+                d = max((int)e[i].size(), d);
+                flag = 0;
+            }
+        }
+    }
+
+    cout << d << ' ' << (flag ? "yes" : "no") << endl;
+    dfs(root, 0);
+}
+
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
