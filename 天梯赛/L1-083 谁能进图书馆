@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int a,b,c,d;
+    cin>>a>>b>>c>>d;
+    if(c>=a&&d>=a){
+        cout<<c<<"-Y"<<' '<<d<<"-Y"<<endl;
+        cout<<"huan ying ru guan";
+        return ;
+    }
+    if(c<a&&d<a){
+        cout<<c<<"-N"<<' '<<d<<"-N"<<endl;
+        cout<<"zhang da zai lai ba";
+        return ;
+    }
+    if(max(c,d)>=b){
+        cout<<c<<"-Y"<<' '<<d<<"-Y"<<endl;
+        if(c>d){
+            cout<<"qing 1 zhao gu hao 2";
+        }
+        else{
+            cout<<"qing 2 zhao gu hao 1";
+        }
+        return ;
+    }
+    else if(c>=a){
+        cout<<c<<"-Y"<<' '<<d<<"-N"<<endl;
+        cout<<"1: huan ying ru guan";
+        return ;
+    }
+    else if(d>=a){
+        cout<<c<<"-N"<<' '<<d<<"-Y"<<endl;
+        cout<<"2: huan ying ru guan";
+        return ;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
