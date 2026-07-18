@@ -1,0 +1,33 @@
+//http://pipioj.online/problem.php?id=1113
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+void solve(){
+	multiset<int> s;
+    for(int i=1;i<=n;i++){
+        int a;
+        cin>>a;
+        s.insert(a);
+    }
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        int a;
+        cin>>a;
+        s.insert(a);
+    }
+    for(auto it=s.begin();it!=s.end();it++){
+        cout<<*it<<' ';
+    }
+    cout<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	while(cin>>n){
+        solve();
+    }
+	return 0;
+}

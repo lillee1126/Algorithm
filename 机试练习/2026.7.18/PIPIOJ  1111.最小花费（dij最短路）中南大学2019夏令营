@@ -1,0 +1,93 @@
+// http://pipioj.online/problem.php?id=1111 注意多组数据输入
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+const int N = 2e3 + 10;
+
+vector<pair<int, double>> v[N];
+
+int n, m;
+int s, e;
+
+bool vis[N];
+double cost[N];
+
+struct node {
+    int p;
+    double dis;
+
+    bool operator<(const node& aa) const {
+        return dis > aa.dis; // 小根堆
+    }
+};
+
+void dij(int start) {
+    priority_queue<node> q;
+
+    cost[start] = 100.0;
+    q.push({start, 100.0});
+
+    while (!q.empty()) {
+        node t = q.top();
+        q.pop();
+
+        int cur = t.p;
+        double curdis = t.dis;
+
+        if (vis[cur]) {
+            continue;
+        }
+
+        vis[cur] = true;
+
+        for (int i = 0; i < (int)v[cur].size(); i++) {
+            int next = v[cur][i].first;
+            double rate = v[cur][i].second;
+
+            double nextDis = curdis / rate;
+
+            if (cost[next] > nextDis) {
+                cost[next] = nextDis;
+                q.push({next, nextDis});
+            }
+        }
+    }
+}
+
+void solve() {
+    // 清空上一组数据
+    for (int i = 1; i <= n; i++) {
+        v[i].clear();
+        vis[i] = false;
+        cost[i] = numeric_limits<double>::infinity();
+    }
+
+    for (int i = 1; i <= m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+
+        double rate = (100.0 - c) / 100.0;
+
+        v[a].push_back({b, rate});
+        v[b].push_back({a, rate});
+    }
+
+    cin >> s >> e;
+
+    dij(e);
+
+    printf("%.8f\n", cost[s]);
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    while (cin >> n >> m) {
+        solve();
+    }
+
+    return 0;
+}

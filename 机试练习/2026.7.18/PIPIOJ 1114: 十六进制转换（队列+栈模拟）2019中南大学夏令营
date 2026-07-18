@@ -1,0 +1,60 @@
+//http://pipioj.online/problem.php?id=1114
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+void solve(){
+	string s;
+    cin>>s;
+    stack<int> ans;
+    queue<int> temp;
+    for(int i=s.size()-1;i>=0;i--){
+        int t=s[i]-'0';
+        if(s[i]=='A') t=10;
+        else if(s[i]=='B') t=11;
+        else if(s[i]=='C') t=12;
+        else if(s[i]=='D') t=13;
+        else if(s[i]=='E') t=14;
+        else if(s[i]=='F') t=15;
+        int cnt=0;
+        while(t){
+            temp.push(t%2);
+            t/=2;
+            cnt++;
+        }
+        while(cnt<4){
+            cnt++;
+            temp.push(0);
+        }
+    }
+    //1010000100001011
+    int cnt=0,cur=0;
+    int a[3]={1,2,4};
+    while(temp.size()){
+        if(cnt<3){
+            cur+=a[cnt]*temp.front();
+            cnt++;
+            temp.pop();
+        }
+        else{
+            ans.push(cur);
+            cnt=0;
+            cur=0;
+        }
+    }
+    if(cur){
+        ans.push(cur);
+    }
+    while(!ans.empty()){
+        cout<<ans.top();
+        ans.pop();
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
