@@ -1,0 +1,67 @@
+//https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7?problemSetProblemId=994805069361299456&page=1
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=31;
+struct node{
+    int val,lc,rc;
+};
+node a[N];
+int b[N];
+int build(int pl,int pr,int il,int ir){
+    if(pl>pr||il>ir){
+        return -1;
+    }
+    int root_val=a[pr].val;
+    int pos=-1;
+    for(int i=1;i<=n;i++){
+        if(b[i]==root_val) {
+            pos = i;
+            break;
+        }
+    }
+    int llen=pos-il;
+    a[pr].lc=build(pl,pl+llen-1,il,il+llen-1);
+    a[pr].rc=build(pl+llen,pr-1,il+llen+1,ir);
+    return pr;
+}
+void solve(){
+	cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].val;
+        a[i].lc=-1;
+        a[i].rc=-1;
+    }
+    for(int i=1;i<=n;i++){
+        cin>>b[i];
+    }
+    int root=build(1,n,1,n);
+    queue<int> q;
+    q.push(root);
+    int cnt=0;
+    while(!q.empty()){
+        auto t=q.front();
+        q.pop();
+        if(cnt){
+            cout<<' ';
+        }
+        cout<<a[t].val;
+        cnt++;
+        if(a[t].lc!=-1){
+            q.push(a[t].lc);
+        }
+        if(a[t].rc!=-1){
+            q.push(a[t].rc);
+        }
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
