@@ -1,0 +1,56 @@
+//http://pipioj.online/problem.php?id=1600
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e5+10;
+int a[N];
+void solve(){
+	cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        a[i]=i+a[i];
+    }
+    //3,5,4,5,9
+    int cur=1;
+    int ans=0;
+    int flag=0;
+    for(int i=1;i<=n;){
+        if(a[i]>=n){
+            flag=1;
+            break;
+        }
+        int m=-1;
+        int mx=a[i];
+        for(int j=i+1;j<=a[i];j++){
+            if(mx<a[j]){
+                m=j;
+                mx=a[j];
+            }
+        }
+        if(m==-1){
+            break;
+        }
+        else{
+            ans++;
+            i=m;
+        }
+    }
+    if(!flag){
+        cout<<-1<<endl;
+        return ;
+    }
+    cout<<ans<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
