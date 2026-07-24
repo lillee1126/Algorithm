@@ -1,12 +1,12 @@
 //感谢分享题目https://github.com/Will-hxw/Solutions-to-2026-East-China-Normal-University-Computer-Based-Coding-Test/
-
+//思路：先找出一段满足要求的区间，在此基础上不断移动，以r为基准，缩小l
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
 using namespace std;
 int n,m;
 const int N=1e5+10;
-string a[100*N];
+string a[N];
 map<string,int> mp;
 void solve(){
     cin>>n;
@@ -27,6 +27,10 @@ void solve(){
         }
     }
     cout<<ans1<<endl;
+    if(ans1 == 0){
+        cout << 0 << endl;
+        return;
+    }
     map<string,queue<int>> pre;//当前窗口中出现s的位置(需要背诵的)
     int l=1,r=1;
     int cnt=0;
@@ -53,12 +57,17 @@ void solve(){
         }
         ans=min(ans,r-l+1);
         r++;
+        if(r<=m){
         if(a[l]==a[r]){
             pre[a[l]].pop();
             pre[a[l]].push(r);//一定要先操作再修改
             l++;
         }
+        else{
+            pre[a[r]].push(r);
+        }
         ans=min(ans,r-l+1);
+        }
     }
     cout<<ans;
 }
