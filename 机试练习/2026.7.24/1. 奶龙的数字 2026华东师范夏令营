@@ -1,0 +1,56 @@
+//感谢分享题目https://github.com/Will-hxw/Solutions-to-2026-East-China-Normal-University-Computer-Based-Coding-Test
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+struct node{
+     int jz;
+     int id;
+     string s;
+     int num;
+};
+int n;
+const int N=2e4+10;
+node a[N];
+map<char,int> m;
+void ps(int t){
+    int cnt=0;
+    for(int i=0;i<a[t].s.size();i++){
+        cnt=cnt*a[t].jz+m[a[t].s[i]];
+    }
+    a[t].num=cnt;
+}
+bool f(const node& aa,const node& bb){
+    if(aa.num!=bb.num){
+        return aa.num<bb.num;
+    }
+    else{
+        return aa.id<bb.id;
+    }
+}
+void solve(){
+    cin>>n;
+    char c='0';
+    while(c<='9'){
+        m[c]=c-'0';
+        c++;
+    }
+    m['A']=10,m['B']=11,m['C']=12,m['D']=13,m['E']=14,m['F']=15;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].jz>>a[i].s;
+        a[i].id=i;
+        ps(i);
+    }
+    sort(a+1,a+1+n,f);
+    for(int i=1;i<=n;i++){
+        cout<<a[i].jz<<' '<<a[i].s<<endl;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}

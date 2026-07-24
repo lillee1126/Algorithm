@@ -1,0 +1,63 @@
+//感谢分享题目https://github.com/Will-hxw/Solutions-to-2026-East-China-Normal-University-Computer-Based-Coding-Test
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e3+10;
+string a[N];
+void ps(int t){
+    string s=a[t];
+    stack<char> st;
+    st.push(s[0]);
+    for(int i=1;i<s.size();i++){
+        if(st.top()!=s[i]){
+            st.push(s[i]);
+        }
+    }
+    string temp="";
+    while(!st.empty()){
+        temp+=st.top();
+        st.pop();
+    }
+    a[t]=temp;
+}
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        ps(i);
+    }
+    map<string,pair<int,int>> mp;
+    for(int i=1;i<=n;i++){
+        if(mp.count(a[i])){
+            mp[a[i]].first++;
+        }
+        else{
+            mp[a[i]]={1,i};
+        }
+    }
+    string ans;
+    pair<int,int> t={-1,-1};
+    for(auto i:mp){
+        if(i.second.first>t.first){
+            ans=i.first;
+            t={i.second.first,i.second.second};
+        }
+        else if(i.second.first==t.first){
+            if(i.second.second<t.second){
+                ans=i.first;
+                t.second=i.second.second;
+            }
+        }
+    }
+    reverse(ans.begin(),ans.end());
+    cout<<ans;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
