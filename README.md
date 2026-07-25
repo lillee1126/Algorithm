@@ -1,22 +1,13 @@
 ### 一站式大学生编程竞赛、保研机试刷题&题解开源仓库
 [Codeforces](https://codeforces.com/)
-
 [洛谷](https://www.luogu.com.cn/)
-
 [力扣Leetcode](https://leetcode.cn/)
-
 [中南大学民间OJ（包含机试真题）](http://pipioj.online/)
-
 [北京大学百练OJ（包含机试真题）](http://bailian.openjudge.cn/)
-
 [上海交通大学ACMOJ](https://acm.sjtu.edu.cn/OnlineJudge/)
-
 [华东师范大学EOJ](https://acm.ecnu.edu.cn/)
-
 [中国科学技术大学USTC OJ](https://oj.ustc.edu.cn/)
-
 [浙江大学ZOJ](https://acm.zju.edu.cn/)
-
 [杭州电子科技大学HDU OJ](https://acm.hdu.edu.cn/)
 
 包含蓝桥杯、天梯赛等主流大学生编程竞赛真题题解，以及多所985/211高校保研机试、复试机试真题代码(位于机试练习文件夹)。
