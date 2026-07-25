@@ -1,0 +1,33 @@
+//感谢题目分享https://www.xiaohongshu.com/explore/6a5ba559000000000a03b151?xsec_token=ABradHg0bdT06unDylyhdY08nYhl_sEOlpbyg5GPVp2GY=&xsec_source=pc_search&source=web_explore_feed
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n=s.size();
+        int ans=0;
+        if(s.size()<=1){
+            return n;
+        }
+        map<char,int> m;
+        int l=0,r=0;
+        while(r<n){
+            if(m.count(s[r])!=1){
+                ans=max(ans,r-l+1);
+                m[s[r]]=r;
+                r++;
+            }
+            else{
+                if(m[s[r]]>=l){
+                    l=m[s[r]]+1;
+                }
+                else{
+                    ans=max(ans,r-l+1);
+                }
+                
+                m[s[r]]=r;
+                r++;
+            }
+        }
+        return ans;
+    }
+};
