@@ -1,0 +1,63 @@
+//https://leetcode.cn/problems/maximal-rectangle/
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
+        vector<int> l(n);
+        stack<int> st;
+        l[n - 1] = n;
+        st.push(n - 1);
+        for (int i = n - 2; i >= 0; i--) {
+            while (!st.empty() && heights[st.top()] >= heights[i]) {
+                st.pop();
+            }
+            if (st.empty()) {
+                l[i] = n;
+            } else {
+                l[i] = st.top();
+            }
+            st.push(i);
+        }
+        vector<int> r(n);
+        while (!st.empty())
+            st.pop();
+        r[0] = -1;
+        st.push(0);
+        for (int i = 1; i < n; i++) {
+            while (!st.empty() && heights[st.top()] >= heights[i]) {
+                st.pop();
+            }
+            if (st.empty()) {
+                r[i] = -1;
+            } else {
+                r[i] = st.top();
+            }
+            st.push(i);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans = max(ans, (l[i] - r[i] - 1) * heights[i]);
+        }
+        return ans;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        if (!n || !m) {
+            return 0;
+        }
+        int ans = 0;
+        vector<int> height(m, 0);
+        for (int i = 0; i < n; i++) { // 构建84的“柱状图”
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == '1') {
+                    height[j]++;
+                } else {
+                    height[j] = 0;
+                }
+            }
+            ans = max(ans, largestRectangleArea(height));//直接调用84的解
+        }
+        return ans;
+    }
+};
