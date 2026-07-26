@@ -1,0 +1,37 @@
+//https://leetcode.cn/problems/reorganize-string/
+class Solution {
+public:
+    string reorganizeString(string s) {
+        map<char, int> cnt;
+        for (char c : s) {
+            cnt[c]++;
+        }
+        int n = s.size();
+        // 如果某个字符出现次数超过 (n + 1) / 2，则无法构造
+        for (auto [c, num] : cnt) {
+            if (num > (n + 1) / 2) {
+                return "";
+            }
+        }
+        priority_queue<pair<int, char>> pq;
+        for (auto [c, num] : cnt) {
+            pq.push({num, c});
+        }
+        string ans;
+        // 上一次选择的字符暂时不能放回堆中
+        pair<int, char> pre = {0, '#'};
+        while (!pq.empty()) {
+            auto [num, c] = pq.top();
+            pq.pop();
+            ans += c;
+            num--;
+            // 上一个字符还有剩余次数，现在可以重新放回堆
+            if (pre.first > 0) {
+                pq.push(pre);
+            }
+            // 当前字符留到下一轮再放回
+            pre = {num, c};
+        }
+        return ans;
+    }
+};
