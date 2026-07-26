@@ -1,0 +1,33 @@
+//https://leetcode.cn/problems/course-schedule/
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> din(numCourses);
+        vector<int> e[numCourses];
+        for(int i=0;i<prerequisites.size();i++){
+            din[prerequisites[i][0]]++;
+            e[prerequisites[i][1]].push_back(prerequisites[i][0]);
+        }
+        queue<int> q;
+        for(int i=0;i<numCourses;i++){
+            if(din[i]==0){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            auto t=q.front();
+            q.pop();
+            for(int i=0;i<e[t].size();i++){
+                if(--din[e[t][i]]==0){
+                    q.push(e[t][i]);
+                }
+            }
+        }
+        for(int i=0;i<numCourses;i++){
+            if(din[i]){
+                return 0;
+            }
+        }
+        return 1;
+    }
+};
