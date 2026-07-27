@@ -1,0 +1,31 @@
+//https://leetcode.cn/problems/split-array-largest-sum/
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int k) {
+        int l=nums[0],r=0;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            r+=nums[i];
+            l=max(l,nums[i]);
+        }
+        while(l<r){
+            int mid=(l+r)/2;
+            int cnt=1;
+            int sum=0;
+            for(int i=0;i<n;i++){
+                sum+=nums[i];
+                if(sum>mid){
+                    cnt++;
+                    sum=nums[i];
+                }
+            }
+            if(cnt<=k){//没有用完，可以更小
+                r=mid;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return r;
+    }
+};
