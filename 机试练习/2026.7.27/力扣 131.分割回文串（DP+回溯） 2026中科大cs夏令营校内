@@ -1,0 +1,45 @@
+//https://leetcode.cn/problems/palindrome-partitioning/description/
+class Solution {
+    bool dp[17][17];
+    vector<vector<string>> ans;
+    vector<string> t;
+    int n;
+
+public:
+    void init(string s) {
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (s[i]==s[j]){
+                    if(i-j+1<=3){
+                        dp[j][i]=1;
+                    }
+                    else{
+                        dp[j][i]=dp[j+1][i-1];
+                    }
+                }
+            }
+        }
+    }
+    void dfs(string s,int cur){
+        if(cur==n){
+            ans.push_back(t);
+            return ;
+        }
+        for(int i=cur;i<n;i++){
+            if(dp[cur][i]){
+                t.push_back(s.substr(cur,i-cur+1));
+                dfs(s,i+1);
+                t.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        n = s.size(); 
+        init(s);
+        dfs(s,0);
+        return ans;
+    }
+};
