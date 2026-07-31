@@ -1,0 +1,96 @@
+//https://leetcode.cn/problems/min-cost-to-connect-all-points/
+
+//prim
+class Solution {
+    bool vis[1010];
+    int dis[1010];
+
+public:
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        int n = points.size();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            dis[i] = INT_MAX;
+        }
+        dis[0] = 0;
+        for (int i = 0; i < n; i++) {
+            int next = -1;
+            for (int j = 0; j < n; j++) {
+                if (!vis[j] && (next == -1 || dis[j] < dis[next])) {
+                    next = j;
+                }
+            }
+            ans+=dis[next];
+            vis[next]=1;
+            for(int j = 0; j<n ;j++){
+                int t = abs(points[next][0]-points[j][0])+abs(points[next][1]-points[j][1]);
+                dis[j]=min(dis[j],t);
+            }
+        }
+        return ans;
+    }
+};
+
+//kruskal
+class Solution {
+    struct edge {
+        int a, b, t;
+    };
+
+    static bool f(const edge& aa, const edge& bb) {
+        return aa.t < bb.t;
+    }
+
+    int fa[1010];
+
+    int find(int x) {
+        if (fa[x] == x) {
+            return x;
+        }
+        return fa[x] = find(fa[x]);
+    }
+
+public:
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        int ans = 0;
+        vector<edge> e;
+
+        for (int i = 0; i < points.size(); i++) {
+            fa[i] = i;
+        }
+
+        for (int i = 0; i < points.size() - 1; i++) {
+            for (int j = i + 1; j < points.size(); j++) {
+                e.push_back({
+                    i,
+                    j,
+                    abs(points[i][0] - points[j][0]) +
+                    abs(points[i][1] - points[j][1])
+                });
+            }
+        }
+
+        sort(e.begin(), e.end(), f);
+
+        int num = 0; // 加入的边数
+
+        for (int i = 0; i < e.size(); i++) {
+            if (num == points.size() - 1) {
+                break;
+            }
+
+            int a = find(e[i].a);
+            int b = find(e[i].b);
+
+            if (a == b) {
+                continue;
+            }
+
+            fa[a] = b;
+            num++;
+            ans += e[i].t;
+        }
+
+        return ans;
+    }
+};
