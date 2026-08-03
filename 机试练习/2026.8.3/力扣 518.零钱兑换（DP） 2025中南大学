@@ -1,0 +1,17 @@
+//https://leetcode.cn/problems/coin-change-ii/
+//题目分享https://www.xiaohongshu.com/explore/68bba4fe000000001b01dafe?xsec_token=ABfL88vohjzerLklgTnJ8WXbFHPGfUxr76SgmoxNosxUI=&xsec_source=pc_search&source=web_explore_feed
+class Solution {
+public:
+    long long change(int amount, vector<int>& coins) {
+        unsigned long long dp[10010];
+        memset(dp, 0, sizeof(dp));
+        dp[0] = 1;
+        for (int i = 0; i < coins.size(); i++) {
+            int coin = coins[i];
+            for (int j = coin; j <= amount; j++) {
+                dp[j] += dp[j - coin];
+            }
+        }
+        return dp[amount];
+    }
+};
