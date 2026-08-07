@@ -1,0 +1,74 @@
+//https://oj.shumeng.tech/p/ecnu20171B
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int num=0;
+int p[64];
+void solve(){
+    num++;
+    int a,b;
+    cin>>a>>b;
+    int t1=a,t2=b;
+    vector<int> bb;
+    vector<int> aa;
+    while(a){
+        aa.push_back(a%2);
+        a/=2;
+    }
+    while(b){
+        bb.push_back(b%2);
+        b/=2;
+    }
+    int flag=1;
+    for(int i=0;i<bb.size();i++){
+        if(bb[i]==0){
+            flag=0;
+            break;
+        }
+    }
+    if(flag){
+        cout<<"Case "<<num<<": "<<t2<<endl;
+    }
+    else{
+        if(bb.size()>aa.size()){
+            cout<<"Case "<<num<<": "<<p[bb.size()-1]-1<<endl;
+            return;
+        }
+        int ans=0;
+        int t=bb.size()-1;
+        while(t>=0&&aa[t]==bb[t]){
+            if(aa[t])
+                ans+=p[t];
+            t--;
+        }
+        for(int i=t;i>=0;i--){
+            if(bb[i]==0){
+                flag=1;
+                break;
+            }
+        }
+        if(!flag){
+            ans+=p[t+1]-1;
+        }
+        else{
+            ans+=p[t]-1;
+        }
+        cout<<"Case "<<num<<": "<<ans<<endl;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+    p[0]=1;
+    for(int i=1;i<=63;i++){
+        p[i]=2*p[i-1];
+    }
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}

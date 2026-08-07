@@ -1,0 +1,146 @@
+//感谢题目分享https://oj.shumeng.tech/p/ecnu20171A
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n;
+vector<int> big;
+vector<int> small;
+vector<int> eq;
+
+void solve(){
+    cin >> n;
+
+    for(int i = 0; i < n; i++){
+        string s;
+        cin >> s >> s;
+
+        int t;
+        cin >> t;
+
+        if(s == "="){
+            eq.push_back(t);
+        }
+        else if(s == ">"){
+            big.push_back(t);
+        }
+        else if(s == "<"){
+            small.push_back(t);
+        }
+        else if(s == "<="){
+            small.push_back(t + 1);
+        }
+        else if(s == ">="){
+            big.push_back(t - 1);
+        }
+    }
+
+    sort(big.begin(), big.end());
+    sort(small.begin(), small.end());
+    sort(eq.begin(), eq.end());
+
+    int ans = max(big.size(), small.size());
+    for(int i = 0; i < eq.size(); i++){
+        int x = eq[i];
+        int t = 0;
+
+        for(int j = 0; j < big.size(); j++){
+            if(x > big[j]){
+                t++;
+            }
+        }
+
+        for(int j = 0; j < small.size(); j++){
+            if(x < small[j]){
+                t++;
+            }
+        }
+
+        for(int j = 0; j < eq.size(); j++){
+            if(x == eq[j]){
+                t++;
+            }
+        }
+
+        ans = max(ans, t);
+    }
+
+    for(int i = 0; i < big.size(); i++){
+        int t = i + 1;
+        int l = big[i] + 1; // 89+1=90
+        int r = -1;
+
+        for(int j = 0; j < small.size(); j++){
+            if(small[j] > l){
+                t += small.size() - j;
+                r = small[j] - 1;
+                break;
+            }
+        }
+
+        if(r != -1){
+            for(int j = 0; j < eq.size(); j++){
+                if(eq[j] <= r && eq[j] >= l){
+                    t++;
+                    break;
+                }
+            }
+        }
+        else{
+            for(int j = 0; j < eq.size(); j++){
+                if(eq[j] >= l){
+                    t++;
+                    break;
+                }
+            }
+        }
+
+        ans = max(ans, t);
+    }
+
+    for(int i = 0; i < small.size(); i++){
+        int t = small.size() - i;
+        int r = small[i] - 1; // 91-1=90
+        int l = -1;
+
+        for(int j = big.size() - 1; j >= 0; j--){
+            if(big[j] < r){
+                t += j + 1;
+                l = big[j] + 1;
+                break;
+            }
+        }
+
+        if(r != -1){
+            for(int j = 0; j < eq.size(); j++){
+                if(eq[j] <= r && eq[j] >= l){
+                    t++;
+                    break;
+                }
+            }
+        }
+        else{
+            for(int j = 0; j < eq.size(); j++){
+                if(eq[j] <= r){
+                    t++;
+                    break;
+                }
+            }
+        }
+
+        ans = max(ans, t);
+    }
+
+    cout << ans;
+}
+
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+
+    return 0;
+}
