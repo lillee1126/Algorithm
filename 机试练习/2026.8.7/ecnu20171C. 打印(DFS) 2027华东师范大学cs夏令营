@@ -1,0 +1,37 @@
+//https://oj.shumeng.tech/p/ecnu20171C
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n,x,y;
+const int N=1e7+10;
+int  dp[N];
+int dfs(int cur){
+    if(dp[cur]!=-1){
+        return dp[cur];
+    }
+    if(cur%2){//7
+        dp[cur]=min(cur*x,dfs(cur/2+1)+y+x);
+        dp[cur]=min(dp[cur],dfs(cur/2)+y+x);
+    }
+    else{
+        dp[cur]=min(cur*x,dfs(cur/2)+y);
+    }
+    return dp[cur];
+}
+void solve(){
+	cin>>n>>x>>y;
+    for(int i=0;i<N;i++){
+        dp[i]=-1;
+    }
+    dp[0]=0;
+    dp[1]=x;
+    cout<<dfs(n);
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
