@@ -1,0 +1,23 @@
+//https://leetcode.cn/problems/car-fleet/
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+        vector<pair<int,double>> a;
+        int n=position.size();
+        for(int i=0;i<n;i++){
+            a.push_back({position[i],(target-position[i])/(double)speed[i]});
+        }
+        sort(a.begin(),a.end());
+        stack<double> s;
+        for(int i=n-1;i>=0;i--){
+            if(s.empty()){
+                s.push(a[i].second);
+                continue;
+            }
+            if(a[i].second>s.top()){
+                s.push(a[i].second);
+            }
+        }
+        return s.size();
+    }
+};
