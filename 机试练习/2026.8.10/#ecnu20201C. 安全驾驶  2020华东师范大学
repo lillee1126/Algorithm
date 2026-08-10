@@ -1,0 +1,30 @@
+//https://oj.shumeng.tech/p/ecnu20201C
+//很离谱，试着交了一发，没想到这就是正解
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int e;
+int n;
+vector<pair<int,int>> a;
+int cost[1010];
+void solve(){
+    cin>>e;
+    cin>>n;
+    double l=0;
+    for(int i=1;i<=n;i++){
+        int pp,qq;
+        cin>>pp>>qq;
+        a.push_back({pp,qq});
+        l=max(l,(e-(double)pp)/qq);
+    }
+    double s=e/l;
+    printf("%.6lf",s);
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
