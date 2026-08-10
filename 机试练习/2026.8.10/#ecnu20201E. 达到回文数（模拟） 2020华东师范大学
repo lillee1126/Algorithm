@@ -1,0 +1,44 @@
+//https://oj.shumeng.tech/p/ecnu20201E
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int re(int n){
+    int p=1;
+    string s=to_string(n);
+    int ans=0;
+    for(int i=0;i<s.size();i++){
+        ans+=p*(s[i]-'0');
+        p*=10;
+    }
+    return ans;
+}
+bool check(int n){
+    string s= to_string(n);
+    for(int i=0,j=s.size()-1;i<j;i++,j--){
+        if(s[i]!=s[j]){
+            return 0;
+        }
+    }
+    return 1;
+}
+void solve(){
+     int n;
+     cin>>n;
+     int t=0;
+     while(1){
+         n=n+re(n);
+         t++;
+         if(check(n)){
+             cout<<t<<' '<<n;
+             return ;
+         }
+     }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
