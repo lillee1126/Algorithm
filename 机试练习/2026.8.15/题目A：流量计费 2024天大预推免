@@ -1,0 +1,35 @@
+//23.02
+//https://blog.csdn.net/weixin_63437585/article/details/141727008?ops_request_misc=elastic_search_misc&request_id=da47e92fd02ec40cfb5e6bb35d8f1c7c&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-141727008-null-null.142^v102^pc_search_result_base2&utm_term=%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E6%9C%BA%E8%AF%95&spm=1018.2226.3001.4187
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int n;
+    cin>>n;
+    int sum=0;
+    for(int i=0;i<n;i++){
+        int t;
+        cin>>t;
+        sum+=t;
+    }
+    int ans=0;
+    if(sum<=500){
+        ans=10;
+    }
+    else{
+        ans=sum-500+10;
+    }
+    cout<<ans<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
