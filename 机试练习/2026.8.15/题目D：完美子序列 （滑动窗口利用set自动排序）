@@ -28,10 +28,9 @@ void solve(){
         }
         else{
             while(md-mx>m){
-                if(mp[a[l]]==1)
-                    s.erase(a[l]);
-                else
-                    mp[a[l]]--;
+                mp[a[l]]--;
+				if(mp[a[l]]==0)
+   					 s.erase(a[l]);
                 l++;
                 md=*(--s.end());
                 mx=*s.begin();
