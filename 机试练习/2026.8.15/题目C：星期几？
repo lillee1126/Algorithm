@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+bool rn(int y){
+    if(y%4==0&&y%400!=0){
+        return 1;
+    }
+    return 0;
+}
+int mon[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+map<int,string> mp;
+void solve(){
+    string s;
+    cin>>s;
+    int y=(s[0]-'0')*1000+(s[1]-'0')*100+(s[2]-'0')*10+(s[3]-'0');
+    int m=(s[5]-'0')*10+s[6]-'0';
+    int d=(s[8]-'0')*10+s[9]-'0';
+    int diff=0;
+    for(int i=1900;i<y;i++){
+        if(rn(i)){
+            diff+=366;
+        }
+        else{
+            diff+=365;
+        }
+    }
+    for(int i=1;i<m;i++){
+        if(i==2){
+            if(rn(y))
+                diff+=29;
+            else
+                diff+=28;
+        }
+        else{
+            diff+=mon[i];
+        }
+    }
+    diff+=d-1;
+    cout<<mp[diff%7]<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+    mp[0]="Monday",mp[1]="Tuesday",mp[2]="Wednesday",mp[3]="Thursday",mp[4]="Friday",mp[5]="Saturday",mp[6]="Sunday";
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
