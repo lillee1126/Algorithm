@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    map<int,int> mp;
+    mp[1]=2;
+    mp[2]=1;
+    mp[3]=4;
+    mp[4]=3;
+    stack<pair<int,int>> s;
+    while(1){
+        int dir,dis;
+        char c;
+        cin>>dir>>c>>dis;
+        if(dir==0&&dis==0)
+            break;
+        if(s.empty()){
+            s.push({dir,dis});
+            continue;
+        }
+        auto t=s.top();
+        if(t.first==mp[dir]){//方向相反
+            if(t.second==dis){
+                s.pop();
+            }
+            else if(t.second>dis){
+                int newd=t.second-dis;
+                s.pop();
+                s.push({mp[dir],newd});
+            }
+            else{
+                int newd=dis-t.second;
+                s.pop();
+                s.push({dir,newd});
+            }
+        }
+        else if(t.first==dir){
+            int newd=dis+t.second;
+            s.pop();
+            s.push({dir,newd});
+        }
+        else{
+            s.push({dir,dis});
+        }
+    }
+    while(!s.empty()){
+        cout<<mp[s.top().first]<<'-'<<s.top().second<<' ';
+        s.pop();
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
