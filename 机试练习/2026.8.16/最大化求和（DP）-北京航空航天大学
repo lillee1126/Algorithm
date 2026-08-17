@@ -1,0 +1,48 @@
+/*
+题目描述
+给定一个长度为 n 的数列 A=a1​,a2​,…,ai​,…,an​，其中 1≤i≤n≤2000000，−50000≤ai​≤50000。
+当给定两个整数 x 和 y（1≤x≤y≤n），A[x:y] 表示数列 A 从下标 x 到下标 y 的子段；同时，sum(x,y) 表示子段 A[x:y] 中所有元素的和（即 sum(x,y)=∑i=xy​ai​）。
+给定两个关于数列 A 的子段：A[x1​:y1​] 和 A[x2​:y2​]，当 x1​≤y1​<x2​≤y2​ 或者 x2​≤y2​<x1​≤y1​ 时，则 A[x1​:y1​] 和 A[x2​:y2​] 这两个子段是不相交的。
+现在给定一个正整数 m，请找到数列 A 的 m 个互相不相交的子段（A[x1​:y1​], A[x2​:y2​], …, A[xk​:yk​], …, A[xm​:ym​]），使得 ∑k=1m​sum(xk​,yk​) 的值最大。
+输入格式
+包含 2 行：
+第 1 行为 2 个整数 m 和 n（m 和 n 的含义如上述所示）；
+第 2 行为 n 个整数，a1​,a2​,…,an​，用来表示数列 A。
+输入样例
+3 8
+-1 -2 10 -3 7 -4 5 -9 3
+输出样例
+22
+*/
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int m,n;
+const int N=2000010;
+const int INF=-(1LL<<60);
+int a[N];
+void solve(){
+	cin>>m>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    vector<int> f(m+1,INF);
+    vector<int> g(m+1,INF);
+    g[0]=0;
+    for(int i=1;i<=n;i++){
+        for(int j=min(i,m);j>=1;j--){
+            f[j]=max(f[j],g[j-1])+a[i];
+            g[j]=max(g[j],f[j]);
+        }
+    }
+    cout<<g[m];
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
