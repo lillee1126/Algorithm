@@ -1,0 +1,68 @@
+/*十五的月亮十六圆，今天仍过中秋节。小天在组装月饼礼盒，月饼礼盒中包含大中小三种月饼，已知 a 个小月饼可以合成一个中月饼，b 个中月饼可以合成一个大月饼。
+x 个小月饼、y 个中月饼、z 个大月饼可以组成一个月饼礼盒。
+小明初始拥有 i 个小月饼、j 个中月饼、k 个大月饼，请问小天最多能组装多少个月饼礼盒。
+多组测试样例，第一行输入一个整数 T 表示样例个数。对于每一个样例，输入八个数字 i j k x y z a b，含义如题面所示。
+
+2 
+10 10 10 1 1 1 2 2 
+20 20 10 1 1 1 2 2
+
+10
+14
+*/
+
+#include<iostream>
+#define int long long
+#define endl '\n'
+using namespace std;
+int a,b,c,x,y,z,p,q;
+bool check(int t,int ra,int rb,int rc){
+    int resta=ra-t*x;
+    rb+=resta/p;
+    if(rb<t*y){
+        return 0;
+    }
+    int restb=rb-t*y;
+    rc+=restb/q;
+    if(rc<t*z){
+        return 0;
+    }
+    return 1;
+}
+void solve(){
+    cin>>a>>b>>c>>x>>y>>z>>p>>q;
+    int na=a/x;
+    int nb=b/y;
+    int nc=c/z;
+    int ans=min(min(na,nb),nc);
+    int ra=a-ans*x;
+    int rb=b-ans*y;
+    int rc=c-ans*z;
+    if(ra<x){
+        cout<<ans<<endl;
+        return ;
+    }
+    int l=0;
+    int r=ra/x;
+    while(l<r){
+        int mid=(l+r+1)/2;
+        if(check(mid,ra,rb,rc)){
+            l=mid;
+        }
+        else{
+            r=mid-1;
+        }
+    }
+    cout<<ans+l<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
