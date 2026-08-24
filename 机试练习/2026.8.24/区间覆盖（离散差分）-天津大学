@@ -1,0 +1,66 @@
+题目描述
+给定 n 个区间 (l,r)，每个区间会覆盖数轴上的对应的 l∼r​ 位置（右端点不算），问数轴上被覆盖次数最多是多少。
+
+输入格式
+多组样例，每组样例格式如下：
+
+第一行包含一个整数 n，表示区间的数量。
+
+接下来的 n 行，每行包含两个整数 l 和 r，表示一个区间的左右端点。
+
+输出格式
+输出一个整数，表示数轴上被覆盖次数的最大值。
+
+数据范围
+
+1≤n≤10000
+
+0≤l<r≤10 
+9
+ 
+
+各个测试数据的 n 之和不超过 10000
+
+输入样例
+2
+1 3
+3 5
+3
+3 5
+1 4
+4 5
+
+输出样例
+1
+2
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+void solve(){
+    int n;
+    while(cin>>n){
+        map<int,int> m;
+        for(int i=1;i<=n;i++){
+            int a,b;
+            cin>>a>>b;
+            m[a]++;
+            m[b]--;
+        }
+        int ans=0;
+        int sum=0;
+        for(auto it=m.begin();it!=m.end();it++){
+            sum+=it->second;
+            ans=max(ans,sum);
+        }
+        cout<<ans<<endl;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
