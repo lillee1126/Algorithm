@@ -1,0 +1,67 @@
+/*
+题目描述
+小海棠截获了一串密码（一个正整数），这个密码不能直接使用。
+
+小海棠需要选择交换密码中任意两个数字，然后和原密码取最小公倍数作为转换密码，获得的最大转换密码即是所求密码。
+
+输入格式
+多组测试样例，第一行包含一个整数 T，表示样例组数。
+
+对于每组样例，包含一个整数表示小海棠截获的密码。
+
+输出格式
+对于每组样例，输出一个数字表示所求密码。
+
+输入样例
+3
+1895
+24
+222
+
+输出样例
+11163445
+168
+222
+*/
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int lcm(int a,int b){
+    if(a<b){
+        swap(a,b);
+    }
+    int t1=a,t2=b;
+    while(b){
+        int temp=a%b;
+        a=b;
+        b=temp;
+    }
+    return t1*t2/a;
+}
+void solve(){
+    string s;
+    cin>>s;
+    int t=stoll(s);
+    int ans=-INT_MAX;
+    for(int i=0;i<s.size()-1;i++){
+        for(int j=i+1;j<s.size();j++){
+            swap(s[i],s[j]);
+            int temp=stoll(s);
+            swap(s[i],s[j]);
+            ans=max(ans,lcm(temp,t));
+        }
+    }
+    cout<<ans<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}

@@ -1,0 +1,67 @@
+题目描述
+小红和小明要做风筝，小红认为直角三角形的风筝最好了。但他们只有 n 根木棍，要从中间选出可以做成最大直角三角形的三根。
+
+输入格式
+第一行输入一个整数 T，表示接下来要做 T 个风筝。
+
+对于每个风筝，输入一个整数 N，表示现有 N 根木棍。
+
+接下来一行输入 N 个数字，表示这几根木棍的长度。
+
+输出格式
+对于每个测试用例，输出能拼成最大直角三角形的三根木棍（升序输出）。
+
+输入样例
+2
+5
+3 6 8 4 5
+6
+3 12 4 5 13 10
+
+输出样例
+3 4 5
+5 12 13
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e5+10;
+int a[N];
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    sort(a+1,a+1+n);
+    for(int i=n;i>=1;i--){
+        int l=1,r=i-1;
+        int t=a[i]*a[i];
+        while(l<r){
+            int p=a[l]*a[l];
+            int q=a[r]*a[r];
+            if(p+q>t){
+                r--;
+            }
+            else if(p+q==t){
+                cout<<a[l]<<' '<<a[r]<<' '<<a[i]<<endl;
+                return ;
+            }
+            else{
+                l++;
+            }
+        }
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
