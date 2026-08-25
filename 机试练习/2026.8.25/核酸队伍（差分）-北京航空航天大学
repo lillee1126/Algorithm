@@ -1,0 +1,93 @@
+题目描述
+有 N 名学生在排队做核酸，被编队为 1、2、3…N，每名学生的身高都为整数。
+
+当且仅当两名学生中间的学生身高都比他们矮时，两名学生方可看到对方。
+
+现在，我们只知道最高的学生的身高是 H，剩余学生的身高未知。但是，我们还知道这群学生之中存在着 M 对关系，每对关系都指明了某两名学生 A 和 B 可以相互看见。
+
+求每名学生的身高的最大可能值是多少。
+
+输入格式
+第一行输入整数 N,H,M，数据用空格隔开。
+
+接下来 M 行，每行两个整数 A 和 B，代表学生 A 和学生 B 可以相互看见，数据用空格隔开。
+
+输出格式
+一共输出 N 行数据，每行输出一个整数。第 i 行输出的整数代表第 i 名学生可能的最大身高。
+
+数据范围
+1≤N≤5000
+
+1≤H≤1000000
+
+0≤M≤10000
+
+输入样例1
+9 185 5
+1 3
+5 3
+4 3
+3 7
+9 8
+
+输出样例1
+185
+184
+185
+183
+184
+184
+185
+185
+185
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+const int N = 5e3 + 10;
+
+int a[N];
+int n, h, m;
+
+void solve(){
+    cin >> n >> h >> m;
+
+    a[1] = h;
+
+    set<pair<int,int>> s;
+
+    while(m--){
+        int l, r;
+        cin >> l >> r;
+
+        if(l > r){
+            swap(l, r);
+        }
+
+        // 重复关系跳过
+        if(s.count({l, r})){
+            continue;
+        }
+
+        s.insert({l, r});
+
+        if(r - l > 1){
+            a[l + 1]--;
+            a[r]++;
+        }
+    }
+
+    for(int i = 1; i <= n; i++){
+        a[i] += a[i - 1];
+        cout << a[i] << endl;
+    }
+}
+
+signed main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+    return 0;
+}

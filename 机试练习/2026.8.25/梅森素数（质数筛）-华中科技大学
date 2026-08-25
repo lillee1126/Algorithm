@@ -1,0 +1,60 @@
+梅森素数-华中科技大学
+题目描述
+我们将满足 $ M = 2^k - 1 $ 的素数称为梅森素数，其中 $ k $ 也需要为某一素数。
+
+比如 $ 3 = 2^2 - 1 $ 即满足这个条件，但是 $ 2^{11} - 1 = 2047 = 23 \times 89 $ 就不是梅森素数。
+
+给定一个数 $ M $，顺序求出所有不大于 $ M $ 的梅森素数。
+
+输入格式
+一个整数 $ M $。
+
+输出格式
+每行输出一个梅森素数，格式为 M(k) = M，其中 $ k $ 是素数，$ M $ 是梅森素数。
+
+输入样例
+97
+
+输出样例
+M(2) = 3
+M(3) = 7
+M(5) = 31
+
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+const int N=1e7;
+bool is[N];
+int n;
+void init(){
+    for(int i=2;i<=sqrt(n);i++){
+        if(!is[i]){
+            for(int j=2;j*i<=n;j++){
+                is[i*j]=1;
+            }
+        }
+    }
+}
+void solve(){
+    cin>>n;
+    init();
+    int a=2;
+    int t=4;
+    int p=t-1;
+    while(p<=n){
+        if(is[a]==0&&is[p]==0){
+            cout<<"M("<<a<<")"<<" = "<<p<<endl;
+        }
+        a++;
+        t*=2;
+        p=t-1;
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
