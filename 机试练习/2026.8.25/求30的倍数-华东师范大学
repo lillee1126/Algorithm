@@ -1,0 +1,60 @@
+题目描述
+输入一个数，比如 201，让数字随意组合，是否能组合出 30 的倍数。
+
+如果能够组合成 30 的倍数，就输出最大的倍数，不能就输出 −1。
+
+例如输入 201 可以随意组合成 201、210、012、021、102、120 等数字，其中 120、210 都是 30 的倍数，由于要找最大的，所以答案是 210。
+
+输入格式
+一个整数。
+
+输出格式
+如果能组合成 30 的倍数，输出最大的倍数；否则输出 −1。
+
+输入样例
+201
+
+输出样例
+210
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int m[10];
+
+void solve(){
+    string s;
+    cin >> s;
+
+    for(int i = 0; i < s.size(); i++){
+        m[s[i] - '0']++;
+    }
+
+    int sum = 0;
+    for(int i = 0; i < 10; i++){
+        sum += i * m[i];
+    }
+
+    if(m[0] == 0 || sum % 3 != 0){
+        cout << -1 << endl;
+        return;
+    }
+
+    for(int i = 9; i >= 0; i--){
+        for(int j = 0; j < m[i]; j++){
+            cout << i;
+        }
+    }
+
+    cout << endl;
+}
+
+signed main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+
+    return 0;
+}
