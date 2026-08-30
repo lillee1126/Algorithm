@@ -1,0 +1,74 @@
+//https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7?problemSetProblemId=994805070971912192&page=1
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e3+10;
+int a[N];
+vector<int> ans;
+bool check(int l,int r,int m){
+    if(l>r) return 1;
+    if(l==r){
+        ans.push_back(a[l]);
+        return 1;
+    }
+    int root=a[l];
+    int i=l+1;
+    if(!m){
+        while(i<=r&&a[i]<root) i++;
+        for(int j=i;j<=r;j++){
+            if(a[j]<root){
+                return false;
+            }
+        }
+    }
+    else{
+        while(i<=r&&a[i]>=root) i++;
+        for(int j=i;j<=r;j++){
+            if(a[j]>=root){
+                return false;
+            }
+        }
+    }
+    if(!check(l+1,i-1,m)) return 0;
+    if(!check(i,r,m)) return 0;
+    ans.push_back(root);
+    return 1;
+}
+void solve(){
+	cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    if(n==1){
+        cout<<"YES"<<endl<<a[1];
+        return ;
+    }
+    if(check(1,n,0)){
+        cout<<"YES"<<endl;
+    }
+    else{
+        ans.clear();
+        if(check(1,n,1)){
+            cout<<"YES"<<endl;
+        }
+        else{
+            cout<<"NO";
+            return;
+        }
+    }
+    for(int i=0;i< ans.size();i++){
+        if(i){
+            cout<<' ';
+        }
+        cout<<ans[i];
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
