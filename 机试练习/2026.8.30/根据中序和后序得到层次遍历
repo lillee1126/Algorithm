@@ -1,0 +1,63 @@
+//https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7?problemSetProblemId=994805069361299456&page=1
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=31;
+int mid[N];
+struct node{
+    int l,r,num;
+}post[N];
+int find(int pl,int pr,int ml,int mr){
+    if(pl>pr||ml>mr){
+        return -1;
+    }
+    int root=pr;
+    int i=ml;
+    for(;i<=mr;i++){
+        if(post[root].num==mid[i]){
+            break;
+        }
+    }
+    int len=i-ml;
+    post[root].l=find(pl,pl+len-1,ml,ml+len-1);
+    post[root].r=find(pl+len,pr-1,ml+len+1,mr);
+    return root;
+}
+void solve(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        post[i].l=-1;
+        post[i].r=-1;
+        cin>>post[i].num;
+    }
+    for(int i=1;i<=n;i++){
+        cin>>mid[i];
+    }
+    int root=find(1,n,1,n);
+    queue<int> q;
+    int cnt=0;
+    q.push(root);
+    while(!q.empty()){
+        if(cnt){
+            cout<<' ';
+        }
+        cnt++;
+        cout<<post[q.front()].num;
+        if(post[q.front()].l!=-1){
+            q.push(post[q.front()].l);
+        }
+        if(post[q.front()].r!=-1){
+            q.push(post[q.front()].r);
+        }
+        q.pop();
+    }
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
