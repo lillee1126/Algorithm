@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+const int N=1e4+10;
+struct node{
+    int a,b,g,k;
+}a[N];
+void solve(){
+	cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i].a>>a[i].b>>a[i].g>>a[i].k;
+    }
+    int x,y;
+    cin>>x>>y;
+    for(int i=n;i>=1;i--){
+        int xl=a[i].a;
+        int xr=a[i].a+a[i].g;
+        int yl=a[i].b;
+        int yr=a[i].b+a[i].k;
+        if(x>=xl&&x<=xr&&y<=yr&&y>=yl){
+            cout<<i;
+            return ;
+        }
+    }
+    cout<<-1;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
