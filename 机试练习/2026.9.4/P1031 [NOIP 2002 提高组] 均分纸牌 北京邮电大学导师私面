@@ -1,0 +1,31 @@
+//https://www.luogu.com.cn/problem/P1031
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+int n;
+int a[110];
+void solve(){
+    int sum=0;
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        sum+=a[i];
+    }
+    sum=sum/n;
+    int cnt=0;
+    for(int i=1;i<=n;i++){
+        if(a[i]!=sum){
+            cnt++;
+        }
+        a[i+1]+=a[i]-sum;
+    }
+    cout<<cnt;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	solve();
+	return 0;
+}
