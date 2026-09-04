@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+
+int n, l;
+const int N = 5e3 + 10;
+int a[N];
+
+void solve() {
+    cin >> l >> n;
+
+    int mn = 0;
+    int mx = 0;
+
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+
+        mn = max(mn, min(a[i], l + 1 - a[i]));
+        mx = max(mx, max(a[i], l + 1 - a[i]));
+    }
+
+    cout << mn << ' ' << mx << endl;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    solve();
+
+    return 0;
+}
