@@ -1,10 +1,5 @@
 # Maximum Height Difference in Climbing Slopes
 
-## 来源
-
-- [pgcode：华东师范大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -50,4 +45,6 @@ Tomislav 感兴趣的是最长的连续上升子序列（称为爬坡），并�
 5
 0
 ```
+
+
 

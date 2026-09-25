@@ -1,10 +1,5 @@
 # WERTYU
 
-## 来源
-
-- [pgcode：上海交通大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -40,4 +35,6 @@ O S, GOMR YPFSU/
 ```
 I AM FINE TODAY.
 ```
+
+
 

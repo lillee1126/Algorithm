@@ -1,12 +1,10 @@
 # PIPIOJ 1111
 
-## 来源
-
-- 本仓库 机试练习/2026.7.18/PIPIOJ  1111.最小花费（dij最短路）中南大学2019夏令营`r
-
 ## 题目与题解
 
 // http://pipioj.online/problem.php?id=1111 注意多组数据输入
+
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -99,5 +97,5 @@ signed main() {
 
     return 0;
 }
-
+```
 

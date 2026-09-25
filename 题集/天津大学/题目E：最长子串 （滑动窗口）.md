@@ -1,12 +1,10 @@
 # 题目E：最长子串 （滑动窗口）
 
-## 来源
-
-- 本仓库 机试练习/2026.8.15/题目E：最长子串 （滑动窗口）`r
-
 ## 题目与题解
 
 //观察到这道题最大结果是52，可以暴力
+
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -69,5 +67,5 @@ signed main(){
     }
 	return 0;
 }
-
+```
 

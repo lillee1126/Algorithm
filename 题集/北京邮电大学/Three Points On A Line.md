@@ -1,10 +1,5 @@
 # Three Points On A Line
 
-## 来源
-
-- [pgcode：北京邮电大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 Given points on a 2D plane, judge whether there're three points that locate on the same line.
@@ -39,4 +34,6 @@ For each test case, output $ Yes $ if there're three points located on the same 
 Yes
 No
 ```
+
+
 

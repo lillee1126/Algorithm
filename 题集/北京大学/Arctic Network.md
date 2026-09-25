@@ -1,10 +1,5 @@
 # Arctic Network
 
-## 来源
-
-- [pgcode：北京大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -47,4 +42,6 @@ For each test case, output the **minimum $ D $** required, rounded to **2 decima
 ```
 212.13
 ```
+
+
 

@@ -1,10 +1,5 @@
 # Is It A Tree
 
-## 来源
-
-- [pgcode：北京大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -40,4 +35,6 @@ Case 1 is a tree.
 Case 2 is a tree.
 Case 3 is not a tree.
 ```
+
+
 

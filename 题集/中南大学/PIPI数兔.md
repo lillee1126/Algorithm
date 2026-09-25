@@ -1,10 +1,5 @@
 # PIPI数兔
 
-## 来源
-
-- [pgcode：中南大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -38,4 +33,6 @@ $1 \leq n \leq 50$
 2
 3
 ```
+
+
 

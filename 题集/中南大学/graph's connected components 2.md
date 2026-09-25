@@ -1,10 +1,5 @@
 # graph's connected components 2
 
-## 来源
-
-- [pgcode：中南大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -30,4 +25,6 @@ ${0 \le n \le 22}$，${1 \le m \le 2^n}$
 2
 1
 ```
+
+
 

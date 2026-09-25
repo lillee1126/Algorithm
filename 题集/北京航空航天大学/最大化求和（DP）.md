@@ -1,9 +1,5 @@
 # 最大化求和（DP）
 
-## 来源
-
-- 本仓库 机试练习/2026.8.16/最大化求和（DP）-北京航空航天大学`r
-
 ## 题目与题解
 
 /*
@@ -23,6 +19,7 @@
 22
 */
 
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -54,5 +51,5 @@ signed main(){
 	solve();
 	return 0;
 }
-
+```
 

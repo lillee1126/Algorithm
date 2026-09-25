@@ -1,10 +1,5 @@
 # Flipping Pancake
 
-## 来源
-
-- [pgcode：北京大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -35,4 +30,6 @@ For each data set, the output is a single-space separated sequence of numbers on
 1 2
 4 3 6 4 2
 ```
+
+
 

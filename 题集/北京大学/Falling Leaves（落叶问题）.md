@@ -1,10 +1,5 @@
 # Falling Leaves（落叶问题）
 
-## 来源
-
-- [pgcode：北京大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 问题描述
@@ -68,4 +63,6 @@ $
 KGCBDHQMPY
 BAC
 ```
+
+
 

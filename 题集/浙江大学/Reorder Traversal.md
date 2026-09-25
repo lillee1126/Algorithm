@@ -1,10 +1,5 @@
 # Reorder Traversal
 
-## 来源
-
-- [pgcode：浙江大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -32,4 +27,6 @@ For each test case, print in one line the last number of the $preorder$ traversa
 ```
 5
 ```
+
+
 

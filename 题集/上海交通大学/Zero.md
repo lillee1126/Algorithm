@@ -1,10 +1,5 @@
 # Zero
 
-## 来源
-
-- [pgcode：上海交通大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -31,4 +26,6 @@ For each case, on the first line of the output file print the sequence in the re
 ```
 9 -8 6 4 -3
 ```
+
+
 

@@ -1,11 +1,8 @@
 # 题目B：买水果
 
-## 来源
-
-- 本仓库 机试练习/2026.8.15/题目B：买水果`r
-
 ## 题目与题解
 
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -48,5 +45,5 @@ signed main(){
     }
 	return 0;
 }
-
+```
 

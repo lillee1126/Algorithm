@@ -1,10 +1,5 @@
 # Powerful Calculator
 
-## 来源
-
-- [pgcode：上海交通大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -47,4 +42,6 @@ For each case, output three separate lines showing the exact results of $additio
 16000000000000000
 80000000000000000000000000000000
 ```
+
+
 

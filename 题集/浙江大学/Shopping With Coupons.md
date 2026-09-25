@@ -1,10 +1,5 @@
 # Shopping With Coupons
 
-## 来源
-
-- [pgcode：浙江大学计算机保研机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -54,4 +49,6 @@ $N \leq 10^5$, $D \leq 10^6$，所有价格和优惠券面值不超过 $10^9$。
 ```
 8 2
 ```
+
+
 

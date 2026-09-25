@@ -1,10 +1,5 @@
 # I Wanna Go Home
 
-## 来源
-
-- [pgcode：北京大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 #### 题目描述
@@ -68,4 +63,6 @@ If it is impossible to reach home according to $Mr. M$'s demands, output $-1$ in
 90
 540
 ```
+
+
 

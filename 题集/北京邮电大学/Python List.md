@@ -1,10 +1,5 @@
 # Python List
 
-## 来源
-
-- [pgcode：北京邮电大学计算机考研复试机试真题](https://gitcode.com/2301_81739397/pgcode)
-- [在线评测](https://pgcode.cn/)
-
 ## 题目
 
 在 Python 中， $List$ (列表)是一种非常重要的数据结构。
@@ -83,4 +78,6 @@ listb[0]
 65
 ERROR
 ```
+
+
 

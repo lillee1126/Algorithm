@@ -1,13 +1,11 @@
 # 洛谷 B3625 迷宫寻路（DFS or BFS）
 
-## 来源
-
-- 本仓库 机试练习/2026.7.15/洛谷 B3625 迷宫寻路（DFS or BFS）厦门大学`r
-
 ## 题目与题解
 
 //https://www.luogu.com.cn/problem/B3625
 //4.25
+
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -56,5 +54,5 @@ signed main(){
 	solve();
 	return 0;
 }
-
+```
 

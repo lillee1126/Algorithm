@@ -1,11 +1,8 @@
 # 题目D：完美子序列 （滑动窗口利用set自动排序）
 
-## 来源
-
-- 本仓库 机试练习/2026.8.15/题目D：完美子序列 （滑动窗口利用set自动排序）`r
-
 ## 题目与题解
 
+```cpp
 #include <bits/stdc++.h>
 #define int long long
 #define endl '\n'
@@ -60,5 +57,5 @@ signed main(){
     }
 	return 0;
 }
-
+```
 
