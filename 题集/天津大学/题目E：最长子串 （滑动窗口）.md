@@ -1,0 +1,73 @@
+# 题目E：最长子串 （滑动窗口）
+
+## 来源
+
+- 本仓库 机试练习/2026.8.15/题目E：最长子串 （滑动窗口）`r
+
+## 题目与题解
+
+//观察到这道题最大结果是52，可以暴力
+#include <bits/stdc++.h>
+#define int long long
+#define endl '\n'
+using namespace std;
+string s;
+void solve(){
+    cin>>s;
+    int n=s.size();
+    s='.'+s;
+    for(int len=52;len>=2;len-=2){
+        map<char,int> mp;
+        if(n<len){
+            continue;
+        }
+        for(int i=1;i<=len;i++){
+            mp[s[i]]++;
+        }
+        int bad=0;
+        for(auto it=mp.begin();it!=mp.end();it++){
+            if(it->second!=2){
+                bad++;
+            }
+        }
+        if(bad==0){
+            cout<<len<<endl;
+            return;
+        }
+        for(int r=len+1;r<=n;r++){
+            int l=r-len;
+            if(mp[s[l]]==2){
+                bad++;
+            }
+            if(mp[s[r]]==0||mp[s[r]]==2){
+                bad++;
+            }
+            mp[s[l]]--;
+            mp[s[r]]++;
+            if(mp[s[l]]==0||mp[s[l]]==2){
+                bad--;
+            }
+            if(mp[s[r]]==2){
+                bad--;
+            }
+            if(bad==0){
+                cout<<len<<endl;
+                return;
+            }
+        }
+    }
+    cout<<0<<endl;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--){
+    	solve();
+    }
+	return 0;
+}
+
+
