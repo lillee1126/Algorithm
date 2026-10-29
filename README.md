@@ -1,3 +1,5 @@
+# **禁止转卖！！！**
+
 ### 一站式大学生编程竞赛、保研机试刷题&题解开源仓库
 [Codeforces](https://codeforces.com/)
 
